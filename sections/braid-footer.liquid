@@ -1,109 +1,193 @@
-<footer class="braid-footer" style="background-color: var(--color-base-background-1);">
+<footer class="braid-footer-section">
   <div class="footer-top">
-    
-    <div class="footer-newsletter">
-      <h3 class="footer-title">Join the club</h3>
-      <p class="footer-text">Get the latest trends and product news delivered.</p>
-      <form class="newsletter-form">
-        <input type="email" placeholder="Email address" class="newsletter-input">
-        <button type="submit" class="newsletter-btn">?</button>
-      </form>
+    <div class="footer-container">
+      <!-- Left: Newsletter -->
+      <div class="footer-newsletter-col">
+        <h3 class="footer-newsletter-title">{{ section.settings.newsletter_title | default: 'Join the Club' }}</h3>
+        <form class="footer-newsletter-form">
+          <div class="newsletter-input-wrapper">
+            <input type="email" placeholder="Email Address" class="newsletter-input">
+            <button type="submit" class="newsletter-submit">&rarr;</button>
+          </div>
+        </form>
+      </div>
+      
+      <!-- Right: Link Columns -->
+      <div class="footer-links-wrapper">
+        <div class="footer-links-col">
+          <h4 class="footer-links-heading">{{ section.settings.col1_title | default: 'OUR COMPANY' }}</h4>
+          <ul class="footer-links-list">
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Gallery</a></li>
+            <li><a href="#">Blog</a></li>
+          </ul>
+        </div>
+        <div class="footer-links-col">
+          <h4 class="footer-links-heading">{{ section.settings.col2_title | default: 'HELP & SUPPORT' }}</h4>
+          <ul class="footer-links-list">
+            <li><a href="#">FAQs</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Booking Policy</a></li>
+            <li><a href="#">Shipping & Returns</a></li>
+          </ul>
+        </div>
+        <div class="footer-links-col">
+          <h4 class="footer-links-heading">{{ section.settings.col3_title | default: 'CONNECT' }}</h4>
+          <ul class="footer-links-list">
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">TikTok</a></li>
+            <li><a href="#">Pinterest</a></li>
+            <li><a href="#">YouTube</a></li>
+          </ul>
+        </div>
+      </div>
     </div>
-
-    <div class="footer-links">
-      <ul class="footer-menu">
-        <li><a href="#">Returns & exchanges</a></li>
-        <li><a href="#">Shipping info</a></li>
-        <li><a href="#">Terms of service</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Contact</a></li>
-      </ul>
-    </div>
-
-  </div>
-
-  <div class="footer-bottom-logo">
-    {{ section.settings.large_text }}
   </div>
   
-  <div class="footer-copyright">
-    <p>&copy; {{ 'now' | date: "%Y" }} {{ shop.name }}. Powered by Shopify.</p>
+  <!-- Massive Logo -->
+  <div class="footer-logo-section">
+    <h2 class="footer-mega-logo">braid<em>theory</em></h2>
+  </div>
+  
+  <div class="footer-bottom">
+    <p class="footer-copyright">&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved. | <a href="#">Privacy Policy</a></p>
   </div>
 </footer>
 
 <style>
-  .braid-footer {
-    padding: 6rem 4rem 2rem;
-    border-top: 1px solid rgba(0,0,0,0.05);
+  .braid-footer-section {
+    background-color: #FAEDDE;
+    border-top: 1px solid rgba(74,52,36,0.1);
   }
   .footer-top {
+    padding: 5rem 4rem 4rem 4rem;
+  }
+  .footer-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 6rem;
+  }
+  
+  /* Newsletter */
+  .footer-newsletter-title {
+    font-family: var(--font-heading-family) !important;
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--color-base-text) !important;
+    margin-bottom: 1.5rem;
+  }
+  .newsletter-input-wrapper {
     display: flex;
-    justify-content: space-between;
-    max-width: 1200px;
-    margin: 0 auto 6rem;
-  }
-  .footer-newsletter {
-    flex: 1;
-  }
-  .footer-title {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    font-family: var(--font-body-family);
-  }
-  .newsletter-form {
-    display: flex;
-    margin-top: 1.5rem;
-    max-width: 300px;
-    border-bottom: 1px solid var(--color-base-text);
+    border-bottom: 1.5px solid var(--color-base-text);
+    padding-bottom: 0.5rem;
+    max-width: 320px;
   }
   .newsletter-input {
     background: transparent;
     border: none;
-    padding: 10px 0;
-    flex: 1;
     outline: none;
-  }
-  .newsletter-btn {
-    background: transparent;
+    font-family: var(--font-body-family);
+    font-size: 1rem;
     color: var(--color-base-text);
-    padding: 0 10px;
-    margin: 0;
-    box-shadow: none;
-  }
-  .footer-links {
     flex: 1;
-    display: flex;
-    justify-content: flex-end;
+    padding: 0.5rem 0;
   }
-  .footer-menu {
+  .newsletter-input::placeholder {
+    color: #8c6b5d;
+  }
+  .newsletter-submit {
+    background: transparent !important;
+    border: none !important;
+    color: var(--color-base-text) !important;
+    font-size: 1.3rem;
+    cursor: pointer;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+  }
+
+  /* Link Columns */
+  .footer-links-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+  }
+  .footer-links-heading {
+    font-family: var(--font-body-family) !important;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-base-text) !important;
+    margin-bottom: 1.5rem;
+  }
+  .footer-links-list {
     list-style: none;
     padding: 0;
     margin: 0;
   }
-  .footer-menu li {
+  .footer-links-list li {
     margin-bottom: 0.8rem;
   }
-  .footer-menu a {
+  .footer-links-list a {
     text-decoration: none;
+    font-family: var(--font-body-family);
+    font-size: 0.95rem;
     color: var(--color-base-text);
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    transition: opacity 0.3s;
   }
-  .footer-bottom-logo {
+  .footer-links-list a:hover {
+    opacity: 0.6;
+  }
+
+  /* Mega Logo */
+  .footer-logo-section {
+    padding: 2rem 4rem 1rem 4rem;
     text-align: center;
-    font-size: 15vw;
-    font-family: var(--font-heading-family);
-    line-height: 0.8;
-    color: #8c6a51; /* Muted brown */
-    margin-bottom: 4rem;
-    white-space: nowrap;
     overflow: hidden;
   }
+  .footer-mega-logo {
+    font-family: var(--font-heading-family) !important;
+    font-size: 12rem;
+    font-weight: 400;
+    color: var(--color-base-text) !important;
+    margin: 0;
+    line-height: 1;
+    letter-spacing: 2px;
+    white-space: nowrap;
+  }
+  .footer-mega-logo em {
+    font-style: italic;
+    font-weight: 300;
+  }
+
+  /* Bottom bar */
+  .footer-bottom {
+    padding: 1.5rem 4rem;
+    border-top: 1px solid rgba(74,52,36,0.1);
+  }
   .footer-copyright {
-    text-align: left;
-    font-size: 0.75rem;
-    opacity: 0.6;
+    font-family: var(--font-body-family);
+    font-size: 0.8rem;
+    color: #8c6b5d;
+    text-align: center;
+  }
+  .footer-copyright a {
+    color: #8c6b5d;
+    text-decoration: none;
+  }
+
+  @media screen and (max-width: 900px) {
+    .footer-container { grid-template-columns: 1fr; gap: 3rem; }
+    .footer-links-wrapper { grid-template-columns: repeat(2, 1fr); }
+    .footer-mega-logo { font-size: 5rem; }
+  }
+  @media screen and (max-width: 500px) {
+    .footer-links-wrapper { grid-template-columns: 1fr; }
+    .footer-mega-logo { font-size: 3.5rem; }
   }
 </style>
 
@@ -113,9 +197,27 @@
   "settings": [
     {
       "type": "text",
-      "id": "large_text",
-      "label": "Massive Footer Text",
-      "default": "braidtheory"
+      "id": "newsletter_title",
+      "label": "Newsletter Title",
+      "default": "Join the Club"
+    },
+    {
+      "type": "text",
+      "id": "col1_title",
+      "label": "Column 1 Heading",
+      "default": "OUR COMPANY"
+    },
+    {
+      "type": "text",
+      "id": "col2_title",
+      "label": "Column 2 Heading",
+      "default": "HELP & SUPPORT"
+    },
+    {
+      "type": "text",
+      "id": "col3_title",
+      "label": "Column 3 Heading",
+      "default": "CONNECT"
     }
   ]
 }

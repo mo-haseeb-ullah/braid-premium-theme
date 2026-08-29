@@ -1,50 +1,64 @@
-<section class="braid-gallery">
-  <div class="gallery-container">
-    {% for block in section.blocks %}
-      <div class="gallery-item">
-        {% if block.settings.image != blank %}
-          <img src="{{ block.settings.image | img_url: '800x' }}" class="gallery-img">
-        {% else %}
-          {{ 'image' | placeholder_svg_tag: 'gallery-placeholder' }}
-        {% endif %}
-      </div>
-    {% endfor %}
+<section class="braid-gallery-strip">
+  <div class="gallery-strip-grid">
+    {% if section.blocks.size > 0 %}
+      {% for block in section.blocks %}
+        <div class="gallery-strip-item" {{ block.shopify_attributes }}>
+          {% if block.settings.image != blank %}
+            <img src="{{ block.settings.image | img_url: '800x' }}" alt="Gallery">
+          {% else %}
+            <img src="{{ 'braid-image-1.png' | asset_url }}" alt="Gallery">
+          {% endif %}
+        </div>
+      {% endfor %}
+    {% else %}
+      <div class="gallery-strip-item"><img src="{{ 'braid-image-110.png' | asset_url }}" alt="Gallery 1"></div>
+      <div class="gallery-strip-item"><img src="{{ 'braid-image-111.png' | asset_url }}" alt="Gallery 2"></div>
+      <div class="gallery-strip-item"><img src="{{ 'braid-image-112.png' | asset_url }}" alt="Gallery 3"></div>
+      <div class="gallery-strip-item"><img src="{{ 'braid-image-108.png' | asset_url }}" alt="Gallery 4"></div>
+    {% endif %}
   </div>
 </section>
 
 <style>
-  .braid-gallery {
+  .braid-gallery-strip {
     width: 100%;
     overflow: hidden;
   }
-  .gallery-container {
-    display: flex;
+  .gallery-strip-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
     width: 100%;
   }
-  .gallery-item {
-    flex: 1;
-    aspect-ratio: 4/5;
+  .gallery-strip-item {
+    width: 100%;
+    aspect-ratio: 1/1;
+    overflow: hidden;
   }
-  .gallery-img, .gallery-placeholder {
+  .gallery-strip-item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
   }
-  .gallery-placeholder {
-    background-color: #e8e8e1;
-    border-right: 1px solid white;
+  .gallery-strip-item:hover img {
+    transform: scale(1.05);
+  }
+
+  @media screen and (max-width: 768px) {
+    .gallery-strip-grid { grid-template-columns: repeat(2, 1fr); }
   }
 </style>
 
 {% schema %}
 {
-  "name": "Braid Gallery Band",
+  "name": "Braid Gallery Strip",
   "settings": [],
   "blocks": [
     {
       "type": "image",
       "name": "Gallery Image",
-      "limit": 6,
       "settings": [
         {
           "type": "image_picker",
@@ -56,13 +70,7 @@
   ],
   "presets": [
     {
-      "name": "Braid Gallery Band",
-      "blocks": [
-        { "type": "image" },
-        { "type": "image" },
-        { "type": "image" },
-        { "type": "image" }
-      ]
+      "name": "Braid Gallery Strip"
     }
   ]
 }

@@ -1,0 +1,104 @@
+<section class="braid-story-section">
+  <div class="story-container">
+    <div class="story-text-col">
+      <div class="story-dots">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+      <div class="story-text-content">
+        <p class="story-text">{{ section.settings.text | default: 'We believe braiding is more than a service &mdash; it is a form of art, self-expression, and cultural pride. Every braid tells a story, and at BraidTheory, we are here to help you tell yours.' }}</p>
+      </div>
+    </div>
+    <div class="story-image-col">
+      {% if section.settings.image != blank %}
+        <img src="{{ section.settings.image | img_url: '1200x' }}" class="story-img" alt="Story">
+      {% else %}
+        <img src="{{ 'braid-image-136.png' | asset_url }}" class="story-img" alt="Our Story">
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<style>
+  .braid-story-section {
+    padding: 0;
+    background-color: #FAEDDE;
+  }
+  .story-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 700px;
+  }
+  .story-text-col {
+    display: flex;
+    align-items: center;
+    padding: 6rem;
+    gap: 3rem;
+  }
+  .story-dots {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #c4a88a;
+    opacity: 0.4;
+  }
+  .dot.active {
+    opacity: 1;
+    background-color: #8c6b5d;
+  }
+  .story-text-content {
+    max-width: 500px;
+  }
+  .story-text {
+    font-family: var(--font-body-family);
+    font-size: 1.15rem;
+    font-weight: 400;
+    line-height: 1.7;
+    color: var(--color-base-text);
+    font-style: italic;
+  }
+  .story-image-col {
+    overflow: hidden;
+  }
+  .story-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  @media screen and (max-width: 900px) {
+    .story-container { grid-template-columns: 1fr; }
+    .story-text-col { padding: 4rem 2rem; }
+    .story-image-col { min-height: 400px; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Braid Story Split",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Story Text"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Braid Story Split"
+    }
+  ]
+}
+{% endschema %}

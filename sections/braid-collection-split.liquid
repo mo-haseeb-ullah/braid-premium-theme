@@ -1,168 +1,200 @@
-<section class="braid-collection-split" style="background-color: var(--color-base-background-1);">
-  <div class="collection-split-container">
-    
-    <!-- Left Image -->
-    <div class="collection-image-wrapper">
-      {% if section.settings.image_left != blank %}
-        <img src="{{ section.settings.image_left | img_url: '800x' }}" class="collection-img">
-      {% else %}
-        {{ 'product-1' | placeholder_svg_tag: 'collection-placeholder' }}
-      {% endif %}
-    </div>
-
-    <!-- Center Content -->
-    <div class="collection-content">
-      <h2 class="collection-title">{{ section.settings.heading }}</h2>
-      <p class="collection-subtitle">{{ section.settings.subtitle }}</p>
-      
-      <div class="collection-accordion">
-        {% for block in section.blocks %}
-          <details class="accordion-item">
-            <summary class="accordion-title">
-              {{ block.settings.title }}
-              <span class="accordion-icon">+</span>
-            </summary>
-            <div class="accordion-content">
-              {{ block.settings.text }}
-            </div>
-          </details>
-        {% endfor %}
+<section class="braid-collection-section">
+  <div class="collection-container">
+    <div class="collection-images-col">
+      <div class="collection-img-grid">
+        {% if section.settings.image_1 != blank %}
+          <img src="{{ section.settings.image_1 | img_url: '800x' }}" class="collection-img" alt="Collection 1">
+        {% else %}
+          <img src="{{ 'braid-image-143.png' | asset_url }}" class="collection-img" alt="Collection">
+        {% endif %}
+        {% if section.settings.image_2 != blank %}
+          <img src="{{ section.settings.image_2 | img_url: '800x' }}" class="collection-img" alt="Collection 2">
+        {% else %}
+          <img src="{{ 'braid-image-148.png' | asset_url }}" class="collection-img" alt="Collection">
+        {% endif %}
       </div>
+    </div>
+    <div class="collection-text-col">
+      <h2 class="collection-title">{{ section.settings.title | default: 'New collection' }}</h2>
+      <p class="collection-subtitle">{{ section.settings.subtitle | default: 'DISCOVER OUR LATEST BRAIDING STYLES AND PREMIUM WIGS' }}</p>
       
-      {% if section.settings.button_label != blank %}
-        <a href="{{ section.settings.button_link }}" class="btn collection-btn">{{ section.settings.button_label }}</a>
-      {% endif %}
-    </div>
+      <div class="collection-product-list">
+        <div class="collection-product">
+          <span class="product-name">{{ section.settings.product_1_name | default: 'Boho Curls' }}</span>
+          <span class="product-price">{{ section.settings.product_1_price | default: '$175.00' }}</span>
+        </div>
+        <div class="collection-product">
+          <span class="product-name">{{ section.settings.product_2_name | default: 'Wool Twisted' }}</span>
+          <span class="product-price">{{ section.settings.product_2_price | default: '$140.00' }}</span>
+        </div>
+        <div class="collection-product">
+          <span class="product-name">{{ section.settings.product_3_name | default: 'Faux Locs' }}</span>
+          <span class="product-price">{{ section.settings.product_3_price | default: '$250.00' }}</span>
+        </div>
+      </div>
 
-    <!-- Right Image -->
-    <div class="collection-image-wrapper">
-      {% if section.settings.image_right != blank %}
-        <img src="{{ section.settings.image_right | img_url: '800x' }}" class="collection-img">
-      {% else %}
-        {{ 'product-2' | placeholder_svg_tag: 'collection-placeholder' }}
-      {% endif %}
+      <a href="{{ section.settings.button_link }}" class="btn collection-btn">{{ section.settings.button_text | default: 'Shop Now' }}</a>
     </div>
-
   </div>
 </section>
 
 <style>
-  .braid-collection-split {
-    padding: 8rem 4rem;
+  .braid-collection-section {
+    padding: 6rem 4rem;
+    background-color: #FAEDDE;
   }
-  .collection-split-container {
+  .collection-container {
     max-width: 1400px;
     margin: 0 auto;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
     align-items: center;
-    gap: 4rem;
   }
-  .collection-image-wrapper {
-    flex: 1;
-    border-radius: 20px;
-    overflow: hidden;
-    aspect-ratio: 4/5;
-    background-color: #E6E2DA; /* Slightly darker cream for contrast */
+  .collection-img-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
   }
-  .collection-img, .collection-placeholder {
+  .collection-img {
     width: 100%;
-    height: 100%;
+    aspect-ratio: 3/4;
     object-fit: cover;
+    border-radius: 16px;
+    display: block;
   }
-  
-  .collection-content {
-    flex: 1.2;
-    text-align: center;
-    padding: 0 2rem;
+
+  .collection-text-col {
+    padding-left: 2rem;
   }
   .collection-title {
-    font-size: 2.5rem;
-    font-family: var(--font-heading-family);
-    margin-bottom: 0.5rem;
-    color: var(--color-base-text);
+    font-family: var(--font-heading-family) !important;
+    font-size: 3rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--color-base-text) !important;
+    margin-bottom: 1rem;
   }
   .collection-subtitle {
-    font-size: 1rem;
-    margin-bottom: 3rem;
-    color: #666;
-  }
-  
-  /* Accordion Styles */
-  .collection-accordion {
-    text-align: left;
+    font-family: var(--font-body-family);
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #8c6b5d;
     margin-bottom: 3rem;
   }
-  .accordion-item {
-    border-top: 1px solid rgba(0,0,0,0.1);
+
+  .collection-product-list {
+    margin-bottom: 3rem;
   }
-  .accordion-item:last-child {
-    border-bottom: 1px solid rgba(0,0,0,0.1);
-  }
-  .accordion-title {
-    padding: 1.5rem 0;
-    font-size: 1.1rem;
-    cursor: pointer;
-    list-style: none; /* Hide default arrow */
+  .collection-product {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 1.2rem 0;
+    border-bottom: 1px solid rgba(74, 52, 36, 0.15);
   }
-  .accordion-title::-webkit-details-marker {
-    display: none;
+  .product-name {
+    font-family: var(--font-heading-family);
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--color-base-text);
   }
-  .accordion-content {
-    padding-bottom: 1.5rem;
-    color: #555;
-    line-height: 1.6;
-  }
-  
-  .collection-btn {
-    width: 100%;
-    max-width: 300px;
+  .product-price {
+    font-family: var(--font-body-family);
+    font-size: 1rem;
+    color: #8c6b5d;
   }
 
-  @media screen and (max-width: 1024px) {
-    .collection-split-container {
-      flex-direction: column;
-    }
-    .collection-image-wrapper {
-      width: 100%;
-      max-width: 500px;
-    }
+  .collection-btn {
+    display: inline-block;
+    padding: 1rem 3rem;
+    background-color: var(--color-base-accent-1) !important;
+    color: #fff !important;
+    text-decoration: none;
+    font-family: var(--font-body-family);
+    font-weight: 500;
+    font-size: 0.95rem;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+  }
+  .collection-btn:hover {
+    background-color: var(--color-base-text) !important;
+  }
+
+  @media screen and (max-width: 900px) {
+    .collection-container { grid-template-columns: 1fr; gap: 3rem; }
+    .collection-text-col { padding-left: 0; text-align: center; }
+    .collection-product { justify-content: center; gap: 2rem; }
   }
 </style>
 
 {% schema %}
 {
-  "name": "Braid Collection Split",
+  "name": "Braid New Collection",
   "settings": [
     {
       "type": "text",
-      "id": "heading",
+      "id": "title",
       "label": "Heading",
       "default": "New collection"
     },
     {
       "type": "text",
       "id": "subtitle",
-      "label": "Subtitle",
-      "default": "Discover our latest premium additions"
+      "label": "Subtitle"
     },
     {
       "type": "image_picker",
-      "id": "image_left",
-      "label": "Left Image"
+      "id": "image_1",
+      "label": "Image 1"
     },
     {
       "type": "image_picker",
-      "id": "image_right",
-      "label": "Right Image"
+      "id": "image_2",
+      "label": "Image 2"
     },
     {
       "type": "text",
-      "id": "button_label",
-      "label": "Button Label",
-      "default": "Buy now"
+      "id": "product_1_name",
+      "label": "Product 1 Name",
+      "default": "Boho Curls"
+    },
+    {
+      "type": "text",
+      "id": "product_1_price",
+      "label": "Product 1 Price",
+      "default": "$175.00"
+    },
+    {
+      "type": "text",
+      "id": "product_2_name",
+      "label": "Product 2 Name",
+      "default": "Wool Twisted"
+    },
+    {
+      "type": "text",
+      "id": "product_2_price",
+      "label": "Product 2 Price",
+      "default": "$140.00"
+    },
+    {
+      "type": "text",
+      "id": "product_3_name",
+      "label": "Product 3 Name",
+      "default": "Faux Locs"
+    },
+    {
+      "type": "text",
+      "id": "product_3_price",
+      "label": "Product 3 Price",
+      "default": "$250.00"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Shop Now"
     },
     {
       "type": "url",
@@ -170,35 +202,9 @@
       "label": "Button Link"
     }
   ],
-  "blocks": [
-    {
-      "type": "accordion",
-      "name": "Accordion Item",
-      "limit": 5,
-      "settings": [
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Title",
-          "default": "Materials"
-        },
-        {
-          "type": "richtext",
-          "id": "text",
-          "label": "Content",
-          "default": "<p>Made from 100% premium synthetic fibers.</p>"
-        }
-      ]
-    }
-  ],
   "presets": [
     {
-      "name": "Braid Collection Split",
-      "blocks": [
-        { "type": "accordion", "settings": { "title": "Materials" } },
-        { "type": "accordion", "settings": { "title": "What You Get" } },
-        { "type": "accordion", "settings": { "title": "How To Use" } }
-      ]
+      "name": "Braid New Collection"
     }
   ]
 }

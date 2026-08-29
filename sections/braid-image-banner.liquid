@@ -1,98 +1,91 @@
-<section class="braid-image-banner">
-  <div class="banner-background">
+<section class="braid-luxury-banner">
+  <div class="luxury-banner-wrapper">
     {% if section.settings.image != blank %}
-      <img src="{{ section.settings.image | img_url: '2000x' }}" class="banner-bg-img">
+      <img src="{{ section.settings.image | img_url: '2000x' }}" class="luxury-banner-bg" alt="Luxury Banner">
     {% else %}
-      <div class="banner-placeholder"></div>
+      <img src="{{ 'braid-image-160.png' | asset_url }}" class="luxury-banner-bg" alt="Luxury Banner">
     {% endif %}
-    <div class="banner-overlay" style="background-color: rgba(0,0,0, {{ section.settings.overlay_opacity | divided_by: 100.0 }});"></div>
-  </div>
-  
-  <div class="banner-content-box">
-    {% if section.settings.subheading != blank %}
-      <p class="banner-subheading">{{ section.settings.subheading }}</p>
-    {% endif %}
-    
-    <h2 class="banner-heading">{{ section.settings.heading }}</h2>
-    
-    {% if section.settings.text != blank %}
-      <div class="banner-text">{{ section.settings.text }}</div>
-    {% endif %}
-    
-    {% if section.settings.button_label != blank %}
-      <a href="{{ section.settings.button_link }}" class="btn banner-btn">{{ section.settings.button_label }}</a>
-    {% endif %}
+    <div class="luxury-banner-overlay"></div>
+    <div class="luxury-banner-content">
+      <h2 class="luxury-banner-title">{{ section.settings.title | default: 'Luxury Hair for Women Who Lead' }}</h2>
+      <a href="{{ section.settings.button_link }}" class="btn luxury-banner-btn">{{ section.settings.button_text | default: 'Shop Now' }}</a>
+    </div>
   </div>
 </section>
 
 <style>
-  .braid-image-banner {
+  .braid-luxury-banner {
+    width: 100%;
+  }
+  .luxury-banner-wrapper {
     position: relative;
     width: 100%;
-    min-height: 60vh;
+    height: 450px;
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    color: #ffffff;
-    padding: 4rem 2rem;
   }
-  .banner-background {
+  .luxury-banner-bg {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-  }
-  .banner-bg-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    z-index: 1;
   }
-  .banner-placeholder {
-    width: 100%;
-    height: 100%;
-    background-color: #5A3D2B;
-  }
-  .banner-overlay {
+  .luxury-banner-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    background: rgba(0,0,0,0.35);
     z-index: 2;
   }
-  .banner-content-box {
+  .luxury-banner-content {
     position: relative;
     z-index: 3;
-    max-width: 800px;
+    text-align: center;
   }
-  .banner-subheading {
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-size: 0.9rem;
-    margin-bottom: 1rem;
-  }
-  .banner-heading {
-    font-size: 4rem;
-    font-family: var(--font-heading-family);
+  .luxury-banner-title {
+    font-family: var(--font-heading-family) !important;
+    font-size: 3.5rem;
+    font-weight: 400;
+    font-style: italic;
+    color: #ffffff !important;
     margin-bottom: 2rem;
-    color: #ffffff;
+    letter-spacing: 1px;
   }
-  .banner-text {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    margin-bottom: 2rem;
+  .luxury-banner-btn {
+    display: inline-block;
+    padding: 1rem 3rem;
+    background-color: transparent !important;
+    color: #fff !important;
+    text-decoration: none;
+    font-family: var(--font-body-family);
+    font-weight: 400;
+    font-size: 0.95rem;
+    border: 1px solid #fff;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
   }
+  .luxury-banner-btn:hover {
+    background-color: #fff !important;
+    color: var(--color-base-text) !important;
+  }
+
   @media screen and (max-width: 768px) {
-    .banner-heading { font-size: 2.5rem; }
+    .luxury-banner-title { font-size: 2.2rem; }
+    .luxury-banner-wrapper { height: 350px; }
   }
 </style>
 
 {% schema %}
 {
-  "name": "Braid Image Banner",
+  "name": "Braid Luxury Banner",
   "settings": [
     {
       "type": "image_picker",
@@ -100,35 +93,16 @@
       "label": "Background Image"
     },
     {
-      "type": "range",
-      "id": "overlay_opacity",
-      "min": 0,
-      "max": 100,
-      "step": 10,
-      "label": "Overlay Opacity",
-      "default": 30
-    },
-    {
       "type": "text",
-      "id": "subheading",
-      "label": "Subheading"
-    },
-    {
-      "type": "text",
-      "id": "heading",
+      "id": "title",
       "label": "Heading",
       "default": "Luxury Hair for Women Who Lead"
     },
     {
-      "type": "richtext",
-      "id": "text",
-      "label": "Text"
-    },
-    {
       "type": "text",
-      "id": "button_label",
-      "label": "Button Label",
-      "default": "Shop Collection"
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Shop Now"
     },
     {
       "type": "url",
@@ -138,7 +112,7 @@
   ],
   "presets": [
     {
-      "name": "Braid Image Banner"
+      "name": "Braid Luxury Banner"
     }
   ]
 }
