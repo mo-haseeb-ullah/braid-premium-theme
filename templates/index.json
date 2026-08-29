@@ -19,6 +19,10 @@
     "braid_split": {
       "type": "braid-collection-split",
       "settings": {}
+    },
+    "braid_banner": {
+      "type": "braid-image-banner",
+      "settings": {}
     }
   },
   "order": [
@@ -26,6 +30,7 @@
     "braid_services",
     "braid_about",
     "braid_gallery",
-    "braid_split"
+    "braid_split",
+    "braid_banner"
   ]
 }
