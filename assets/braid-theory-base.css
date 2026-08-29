@@ -2,7 +2,7 @@
 
 :root {
   --color-base-text: #4a3424;
-  --color-base-background-1: #f6f3eb;
+  --color-base-background-1: #FAEDDE;
   --color-base-background-2: #e8e2d5;
   --color-base-solid-button-labels: #ffffff;
   --color-base-accent-1: #8c6b5d;
@@ -31,3 +31,4 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   text-transform: uppercase;
   letter-spacing: 1px;
 }
+
