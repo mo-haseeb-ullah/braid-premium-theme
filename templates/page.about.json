@@ -1,0 +1,33 @@
+{
+  "sections": {
+    "marquee": {
+      "type": "braid-marquee-banner",
+      "settings": {
+        "text": "About us"
+      }
+    },
+    "about_hero": {
+      "type": "braid-about-hero",
+      "settings": {}
+    },
+    "features": {
+      "type": "braid-features-row",
+      "settings": {}
+    },
+    "values": {
+      "type": "braid-values-grid",
+      "settings": {}
+    },
+    "fullwidth": {
+      "type": "braid-fullwidth-image",
+      "settings": {}
+    }
+  },
+  "order": [
+    "marquee",
+    "about_hero",
+    "features",
+    "values",
+    "fullwidth"
+  ]
+}

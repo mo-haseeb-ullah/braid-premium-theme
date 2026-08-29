@@ -1,0 +1,120 @@
+<section class="braid-features-section">
+  <div class="features-container">
+    <div class="feature-item">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:40px;height:40px;">
+          <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+        </svg>
+      </div>
+      <h3 class="feature-title">{{ section.settings.title_1 | default: 'Fast delivery' }}</h3>
+      <p class="feature-text">{{ section.settings.text_1 | default: 'We deliver your order within 3-5 business days, carefully packaged to perfection.' }}</p>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:40px;height:40px;">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+        </svg>
+      </div>
+      <h3 class="feature-title">{{ section.settings.title_2 | default: 'Diamond Quality' }}</h3>
+      <p class="feature-text">{{ section.settings.text_2 | default: 'Every strand is premium, every piece is crafted to make you look and feel like royalty.' }}</p>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:40px;height:40px;">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+        </svg>
+      </div>
+      <h3 class="feature-title">{{ section.settings.title_3 | default: 'Customer-First Care' }}</h3>
+      <p class="feature-text">{{ section.settings.text_3 | default: 'More than a brand, we are personal. We are here for you every step of the way.' }}</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .braid-features-section {
+    padding: 5rem 4rem;
+    background-color: #FAEDDE;
+    border-top: 1px solid rgba(74,52,36,0.1);
+    border-bottom: 1px solid rgba(74,52,36,0.1);
+  }
+  .features-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4rem;
+  }
+  .feature-item {
+    text-align: center;
+  }
+  .feature-icon {
+    color: var(--color-base-text);
+    margin-bottom: 1.5rem;
+  }
+  .feature-title {
+    font-family: var(--font-heading-family) !important;
+    font-size: 1.5rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--color-base-text) !important;
+    margin-bottom: 1rem;
+  }
+  .feature-text {
+    font-family: var(--font-body-family);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--color-base-text);
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  @media screen and (max-width: 768px) {
+    .features-container { grid-template-columns: 1fr; gap: 3rem; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Braid Features Row",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title_1",
+      "label": "Feature 1 Title",
+      "default": "Fast delivery"
+    },
+    {
+      "type": "text",
+      "id": "text_1",
+      "label": "Feature 1 Text"
+    },
+    {
+      "type": "text",
+      "id": "title_2",
+      "label": "Feature 2 Title",
+      "default": "Diamond Quality"
+    },
+    {
+      "type": "text",
+      "id": "text_2",
+      "label": "Feature 2 Text"
+    },
+    {
+      "type": "text",
+      "id": "title_3",
+      "label": "Feature 3 Title",
+      "default": "Customer-First Care"
+    },
+    {
+      "type": "text",
+      "id": "text_3",
+      "label": "Feature 3 Text"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Braid Features Row"
+    }
+  ]
+}
+{% endschema %}

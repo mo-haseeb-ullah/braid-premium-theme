@@ -1,0 +1,174 @@
+<section class="braid-values-section">
+  <div class="values-container">
+    <div class="values-image-left">
+      {% if section.settings.image_left != blank %}
+        <img src="{{ section.settings.image_left | img_url: '800x' }}" alt="Values">
+      {% else %}
+        <img src="{{ 'braid-image-104.png' | asset_url }}" alt="Values">
+      {% endif %}
+    </div>
+    
+    <div class="values-center-col">
+      <h2 class="values-heading">{{ section.settings.heading | default: 'What We Stand For' }}</h2>
+      
+      <div class="values-item">
+        <h3 class="values-item-title">{{ section.settings.value_1_title | default: 'Cultural Roots' }}</h3>
+        <p class="values-item-text">{{ section.settings.value_1_text | default: 'We honor braiding as an art form rooted in history, tradition, and self-expression. Every style we create carries the weight of generations.' }}</p>
+      </div>
+      
+      <div class="values-item">
+        <h3 class="values-item-title">{{ section.settings.value_2_title | default: 'Uncompromising Quality' }}</h3>
+        <p class="values-item-text">{{ section.settings.value_2_text | default: 'Only premium fibers, expert craftsmanship, and attention to detail. We do not cut corners. We set standards.' }}</p>
+      </div>
+      
+      <div class="values-item">
+        <h3 class="values-item-title">{{ section.settings.value_3_title | default: 'Made for You' }}</h3>
+        <p class="values-item-text">{{ section.settings.value_3_text | default: 'Whether you are shopping online or visiting our studio, every experience is personal. We are here to help you find the style that is uniquely yours.' }}</p>
+      </div>
+      
+      <div class="values-item">
+        <h3 class="values-item-title">{{ section.settings.value_4_title | default: 'Celebrating Beauty' }}</h3>
+        <p class="values-item-text">{{ section.settings.value_4_text | default: 'Protective styling that makes you feel beautiful and protected. We celebrate every texture.' }}</p>
+      </div>
+    </div>
+    
+    <div class="values-image-right">
+      {% if section.settings.image_right != blank %}
+        <img src="{{ section.settings.image_right | img_url: '800x' }}" alt="Values">
+      {% else %}
+        <img src="{{ 'braid-image-106.png' | asset_url }}" alt="Values">
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<style>
+  .braid-values-section {
+    padding: 6rem 4rem;
+    background-color: #FAEDDE;
+  }
+  .values-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  .values-image-left img,
+  .values-image-right img {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    border-radius: 16px;
+    display: block;
+  }
+  .values-center-col {
+    padding-top: 2rem;
+  }
+  .values-heading {
+    font-family: var(--font-heading-family) !important;
+    font-size: 2.5rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--color-base-text) !important;
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  .values-item {
+    margin-bottom: 2.5rem;
+  }
+  .values-item-title {
+    font-family: var(--font-heading-family) !important;
+    font-size: 1.3rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--color-base-text) !important;
+    margin-bottom: 0.5rem;
+  }
+  .values-item-text {
+    font-family: var(--font-body-family);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--color-base-text);
+  }
+
+  @media screen and (max-width: 900px) {
+    .values-container { grid-template-columns: 1fr; }
+    .values-image-left, .values-image-right { max-width: 400px; margin: 0 auto; }
+    .values-center-col { padding-top: 0; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Braid Values Grid",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "What We Stand For"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_left",
+      "label": "Left Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_right",
+      "label": "Right Image"
+    },
+    {
+      "type": "text",
+      "id": "value_1_title",
+      "label": "Value 1 Title",
+      "default": "Cultural Roots"
+    },
+    {
+      "type": "textarea",
+      "id": "value_1_text",
+      "label": "Value 1 Text"
+    },
+    {
+      "type": "text",
+      "id": "value_2_title",
+      "label": "Value 2 Title",
+      "default": "Uncompromising Quality"
+    },
+    {
+      "type": "textarea",
+      "id": "value_2_text",
+      "label": "Value 2 Text"
+    },
+    {
+      "type": "text",
+      "id": "value_3_title",
+      "label": "Value 3 Title",
+      "default": "Made for You"
+    },
+    {
+      "type": "textarea",
+      "id": "value_3_text",
+      "label": "Value 3 Text"
+    },
+    {
+      "type": "text",
+      "id": "value_4_title",
+      "label": "Value 4 Title",
+      "default": "Celebrating Beauty"
+    },
+    {
+      "type": "textarea",
+      "id": "value_4_text",
+      "label": "Value 4 Text"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Braid Values Grid"
+    }
+  ]
+}
+{% endschema %}
