@@ -1,62 +1,113 @@
-<section class="braid-services" style="background-color: var(--color-base-background-1);">
-  <div class="services-header">
-    <h2 class="services-title">{{ section.settings.heading }}</h2>
-    <p class="services-description">{{ section.settings.description }}</p>
-  </div>
-
-  <div class="services-grid">
-    {% for block in section.blocks %}
-      <div class="service-card">
-        <div class="service-image-wrapper">
-          {% if block.settings.image != blank %}
-            <img src="{{ block.settings.image | img_url: '600x' }}" alt="{{ block.settings.title }}" class="service-img">
-          {% else %}
-            {{ 'image' | placeholder_svg_tag: 'service-placeholder' }}
-          {% endif %}
-        </div>
-        <div class="service-info">
-          <h3 class="service-name">{{ block.settings.title }}</h3>
-          <span class="service-price">{{ block.settings.price }}</span>
-        </div>
+<section class="braid-services-section">
+  <div class="services-container">
+    
+    <!-- Top Row: Title and Text -->
+    <div class="services-header">
+      <div class="services-title-col">
+        <h2 class="services-title">{{ section.settings.title | default: 'Our Services' }}</h2>
       </div>
-    {% endfor %}
-  </div>
-
-  {% if section.settings.button_label != blank %}
-    <div class="services-footer">
-      <a href="{{ section.settings.button_link }}" class="btn services-btn">{{ section.settings.button_label }}</a>
+      <div class="services-text-col">
+        <p class="services-text">{{ section.settings.text | default: 'Whether you’re going for a protective look, a bold transformation, or a signature everyday style — our expert braiders have you covered. Choose your look, reserve your time, and let us handle the rest.' }}</p>
+      </div>
     </div>
-  {% endif %}
+
+    <!-- Middle Row: 4 Column Grid -->
+    <div class="services-grid">
+      {% for block in section.blocks %}
+        <div class="service-card" {{ block.shopify_attributes }}>
+          <div class="service-image-wrapper">
+            {% if block.settings.image != blank %}
+              <img src="{{ block.settings.image | img_url: '600x' }}" class="service-img" alt="{{ block.settings.title }}">
+            {% else %}
+              <!-- Auto Fallback Demo Images based on loop index -->
+              {% assign demo_image = 'braid-image-' | append: forloop.index | append: '.jpg' %}
+              <img src="{{ demo_image | asset_url }}" class="service-img fallback-demo" alt="Demo Image">
+            {% endif %}
+          </div>
+          <h3 class="service-card-title">{{ block.settings.title | default: 'Service Name' }}</h3>
+          <p class="service-card-price">{{ block.settings.price | default: '.00' }}</p>
+        </div>
+      {% endfor %}
+
+      <!-- If no blocks are added by user in editor, show 4 default demo cards! -->
+      {% if section.blocks.size == 0 %}
+        <div class="service-card">
+          <div class="service-image-wrapper"><img src="{{ 'braid-image-2.jpg' | asset_url }}" class="service-img"></div>
+          <h3 class="service-card-title">Knotless Braids</h3>
+          <p class="service-card-price">.00</p>
+        </div>
+        <div class="service-card">
+          <div class="service-image-wrapper"><img src="{{ 'braid-image-3.jpg' | asset_url }}" class="service-img"></div>
+          <h3 class="service-card-title">Goddess Braids</h3>
+          <p class="service-card-price">.00</p>
+        </div>
+        <div class="service-card">
+          <div class="service-image-wrapper"><img src="{{ 'braid-image-4.jpg' | asset_url }}" class="service-img"></div>
+          <h3 class="service-card-title">Cornrows with Design</h3>
+          <p class="service-card-price">.00</p>
+        </div>
+        <div class="service-card">
+          <div class="service-image-wrapper"><img src="{{ 'braid-image-5.jpg' | asset_url }}" class="service-img"></div>
+          <h3 class="service-card-title">Boho Braids</h3>
+          <p class="service-card-price">.00</p>
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- Bottom Row: Button -->
+    <div class="services-footer">
+      <a href="{{ section.settings.button_link }}" class="btn services-btn">{{ section.settings.button_text | default: 'View Full Service Menu' }}</a>
+    </div>
+
+  </div>
 </section>
 
 <style>
-  .braid-services {
+  .braid-services-section {
     padding: 6rem 4rem;
+    background-color: var(--color-base-background-1);
+  }
+  .services-container {
     max-width: 1400px;
     margin: 0 auto;
   }
+  
+  /* Header Layout */
   .services-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     margin-bottom: 4rem;
+    gap: 4rem;
+  }
+  .services-title-col {
+    flex: 1;
   }
   .services-title {
+    font-family: var(--font-heading-family);
     font-size: 3rem;
+    font-weight: 400;
+    color: var(--color-base-text);
     margin: 0;
-    width: 40%;
-    color: #ae754a; /* Golden brown accent */
   }
-  .services-description {
-    width: 50%;
+  .services-text-col {
+    flex: 1;
+  }
+  .services-text {
+    font-family: var(--font-body-family);
     font-size: 1.1rem;
     line-height: 1.6;
+    color: var(--color-base-text);
     margin: 0;
+    max-width: 600px;
   }
+
+  /* Grid Layout */
   .services-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
+    gap: 2rem;
+    margin-bottom: 4rem;
   }
   .service-card {
     display: flex;
@@ -64,52 +115,63 @@
   }
   .service-image-wrapper {
     width: 100%;
-    aspect-ratio: 3/4;
+    aspect-ratio: 3/4; /* Matches the tall portrait aspect ratio */
+    border-radius: 12px;
     overflow: hidden;
-    border-radius: 8px;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
   }
   .service-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s ease;
+    transition: transform 0.4s ease;
   }
   .service-card:hover .service-img {
-    transform: scale(1.05);
+    transform: scale(1.03); /* Subtle hover effect */
   }
-  .service-placeholder {
-    width: 100%;
-    height: 100%;
-    background-color: #e8e8e1;
+  .service-card-title {
+    font-family: var(--font-heading-family);
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--color-base-text);
+    margin: 0 0 0.5rem 0;
   }
-  .service-info {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    border-top: 1px solid rgba(0,0,0,0.1);
-    padding-top: 1rem;
-  }
-  .service-name {
-    font-size: 1rem;
-    margin: 0;
+  .service-card-price {
     font-family: var(--font-body-family);
+    font-size: 0.95rem;
+    color: #666;
+    margin: 0;
   }
-  .service-price {
-    font-size: 0.9rem;
-    opacity: 0.7;
-  }
+
+  /* Footer Button */
   .services-footer {
     text-align: center;
-    margin-top: 4rem;
   }
-  @media screen and (max-width: 900px) {
+  .services-btn {
+    display: inline-block;
+    padding: 1.2rem 3rem;
+    background-color: var(--color-base-accent-1) !important;
+    color: #fff !important;
+    text-decoration: none;
+    font-family: var(--font-body-family);
+    font-weight: 500;
+    font-size: 1rem;
+    border-radius: 8px;
+    text-transform: none;
+    letter-spacing: normal;
+    transition: background-color 0.3s ease;
+  }
+  .services-btn:hover {
+    background-color: var(--color-base-text) !important;
+  }
+
+  @media screen and (max-width: 1024px) {
     .services-grid { grid-template-columns: repeat(2, 1fr); }
-    .services-header { flex-direction: column; }
-    .services-title, .services-description { width: 100%; margin-bottom: 2rem; }
   }
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 768px) {
+    .services-header { flex-direction: column; gap: 1.5rem; }
     .services-grid { grid-template-columns: 1fr; }
+    .braid-services-section { padding: 4rem 2rem; }
   }
 </style>
 
@@ -119,21 +181,20 @@
   "settings": [
     {
       "type": "text",
-      "id": "heading",
+      "id": "title",
       "label": "Heading",
       "default": "Our Services"
     },
     {
       "type": "textarea",
-      "id": "description",
-      "label": "Description",
-      "default": "Premium styling services tailored for modern women."
+      "id": "text",
+      "label": "Description Text"
     },
     {
       "type": "text",
-      "id": "button_label",
-      "label": "Button Label",
-      "default": "Book Appointment"
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "View Full Service Menu"
     },
     {
       "type": "url",
@@ -145,37 +206,31 @@
     {
       "type": "service",
       "name": "Service Card",
-      "limit": 8,
+      "limit": 4,
       "settings": [
         {
           "type": "image_picker",
           "id": "image",
-          "label": "Service Image"
+          "label": "Image"
         },
         {
           "type": "text",
           "id": "title",
-          "label": "Service Name",
-          "default": "Knotless Braids"
+          "label": "Service Title",
+          "default": "Service Name"
         },
         {
           "type": "text",
           "id": "price",
-          "label": "Price/Duration",
-          "default": "+"
+          "label": "Price",
+          "default": ".00"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Braid Services Grid",
-      "blocks": [
-        { "type": "service" },
-        { "type": "service" },
-        { "type": "service" },
-        { "type": "service" }
-      ]
+      "name": "Braid Services Grid"
     }
   ]
 }
