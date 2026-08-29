@@ -1,10 +1,16 @@
 <header class="braid-header">
   <div class="header-container">
-    <!-- Left Navigation -->
+    
+    <!-- Left Navigation (Hardcoded Demo Links) -->
     <nav class="header-nav-left">
-      {% for link in linklists.main-menu.links %}
-        <a href="{{ link.url }}" class="header-link">{{ link.title }}</a>
-      {% endfor %}
+      <a href="/" class="header-link">Home</a>
+      <a href="/collections/all" class="header-link">Shop</a>
+      <a href="#" class="header-link">Services</a>
+      <a href="#" class="header-link">About</a>
+      <a href="#" class="header-link">FAQs</a>
+      <a href="/blogs/news" class="header-link">Blog</a>
+      <a href="#" class="header-link">Gallery</a>
+      <a href="/pages/contact" class="header-link">Contact</a>
     </nav>
     
     <!-- Center Logo -->
@@ -13,72 +19,92 @@
         {% if section.settings.logo != blank %}
           <img src="{{ section.settings.logo | img_url: '400x' }}" alt="{{ shop.name }}">
         {% else %}
-          <span class="logo-text" style="font-family: var(--font-heading-family); font-size: 2.2rem; font-weight: 400; color: #4a3424;">braid<em style="font-style:italic;font-weight:300;">theory</em></span>
+          <span class="logo-text" style="font-family: var(--font-heading-family); font-size: 2.2rem; font-weight: 400; color: #ffffff;">braid<em style="font-style:italic;font-weight:300;">theory</em></span>
         {% endif %}
       </a>
     </div>
     
     <!-- Right Icons -->
-    <div class="header-icons">
-      <a href="/search" class="icon-link"><svg viewBox="0 0 20 20" class="icon icon-search" style="width:20px;height:20px;"><path fill-rule="evenodd" d="M8.5 2a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8.5a8.5 8.5 0 1115.358 5.444l4.5 4.5a1 1 0 01-1.414 1.414l-4.5-4.5A8.5 8.5 0 010 8.5z" fill="currentColor"></path></svg>Search</a>
-      <a href="/account" class="icon-link"><svg viewBox="0 0 20 20" class="icon icon-account" style="width:20px;height:20px;"><path d="M10 9a4 4 0 100-8 4 4 0 000 8zm0-2a2 2 0 110-4 2 2 0 010 4zM4.093 16C4.542 13.791 6.522 12 10 12s5.458 1.791 5.907 4H4.093zM2.03 16.488C2.868 12.83 6.07 10 10 10s7.132 2.83 7.97 6.488A1 1 0 0117.001 18H2.999a1 1 0 01-.97-1.512z" fill="currentColor"></path></svg>Account</a>
-      <a href="/cart" class="icon-link"><svg viewBox="0 0 20 20" class="icon icon-cart" style="width:20px;height:20px;"><path fill-rule="evenodd" d="M14 6V4a4 4 0 10-8 0v2H2v10a2 2 0 002 2h12a2 2 0 002-2V6h-4zm-2 0H8V4a2 2 0 114 0v2zm4 2H4v8h12V8z" fill="currentColor"></path></svg>Cart</a>
+    <div class="header-icons-right">
+      <a href="/search" class="header-icon"><svg viewBox="0 0 20 20" class="icon icon-search" style="width:20px;height:20px;"><path fill-rule="evenodd" d="M8.5 2a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8.5a8.5 8.5 0 1115.358 5.444l4.5 4.5a1 1 0 01-1.414 1.414l-4.5-4.5A8.5 8.5 0 010 8.5z" fill="currentColor"></path></svg></a>
+      <a href="/account" class="header-icon"><svg viewBox="0 0 20 20" class="icon icon-account" style="width:22px;height:22px;"><path d="M10 9a4 4 0 100-8 4 4 0 000 8zm0-2a2 2 0 110-4 2 2 0 010 4zM4.093 16C4.542 13.791 6.522 12 10 12s5.458 1.791 5.907 4H4.093zM2.03 16.488C2.868 12.83 6.07 10 10 10s7.132 2.83 7.97 6.488A1 1 0 0117.001 18H2.999a1 1 0 01-.97-1.512z" fill="currentColor"></path></svg></a>
+      <a href="/cart" class="header-icon"><svg viewBox="0 0 20 20" class="icon icon-cart" style="width:22px;height:22px;"><path fill-rule="evenodd" d="M14 6V4a4 4 0 10-8 0v2H2v10a2 2 0 002 2h12a2 2 0 002-2V6h-4zm-2 0H8V4a2 2 0 114 0v2zm4 2H4v8h12V8z" fill="currentColor"></path></svg></a>
     </div>
+    
   </div>
 </header>
 
 <style>
-  .braid-header {
-    width: 100%;
-    padding: 1.5rem 4rem;
-    position: absolute; /* Overlaps hero on homepage */
+  /* Force global transparent header wrapper */
+  #shopify-section-header, .shopify-section-header, #shopify-section-header-group {
+    position: absolute !important;
     top: 0;
     left: 0;
-    z-index: 100;
-    background-color: transparent;
+    width: 100% !important;
+    z-index: 9999 !important;
+    background: transparent !important;
+    background-color: transparent !important;
   }
+
+  .braid-header {
+    width: 100%;
+    padding: 2.5rem 4rem;
+    background: transparent !important;
+  }
+  
   .header-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1600px;
-    margin: 0 auto;
+    width: 100%;
   }
+
   .header-nav-left {
     flex: 1;
     display: flex;
-    gap: 2rem;
+    gap: 1.8rem;
   }
+
   .header-link {
     text-decoration: none;
-    color: var(--color-base-text);
-    text-transform: uppercase;
-    font-size: 0.8rem;
-    letter-spacing: 0.05em;
+    color: #ffffff !important;
+    font-family: var(--font-body-family);
+    font-size: 0.95rem;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    text-transform: capitalize;
   }
+  
+  .header-link:hover {
+    opacity: 0.7;
+  }
+
   .header-logo {
     flex: 1;
     text-align: center;
   }
-  .logo-text {
-    font-family: var(--font-heading-family);
-    font-size: 2.5rem;
-    font-style: italic;
-    color: var(--color-base-text);
+  .header-logo a {
     text-decoration: none;
   }
-  .header-logo a { text-decoration: none; }
-  .header-icons {
+
+  .header-icons-right {
     flex: 1;
     display: flex;
     justify-content: flex-end;
-    gap: 1.5rem;
+    gap: 2rem;
   }
-  .icon-link {
-    text-decoration: none;
-    color: var(--color-base-text);
-    font-size: 0.8rem;
-    text-transform: uppercase;
+
+  .header-icon {
+    color: #ffffff !important;
+    transition: opacity 0.3s;
+  }
+  .header-icon:hover {
+    opacity: 0.7;
+  }
+
+  @media screen and (max-width: 768px) {
+    .header-nav-left { display: none; }
+    .braid-header { padding: 1.5rem 2rem; }
   }
 </style>
 
@@ -94,5 +120,3 @@
   ]
 }
 {% endschema %}
-
-
