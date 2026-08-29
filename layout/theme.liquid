@@ -319,7 +319,8 @@
         document.documentElement.classList.add('shopify-design-mode');
       }
     </script>
-  </head>
+  <link rel="stylesheet" href="{{ 'braid-theory-base.css' | asset_url }}">
+</head>
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
@@ -403,3 +404,4 @@
     {%- endif -%}
   </body>
 </html>
+

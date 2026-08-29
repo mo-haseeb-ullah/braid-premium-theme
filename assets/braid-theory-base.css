@@ -1,31 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500&display=swap');
+
 :root {
-  --color-base-background-1: #F5EFEB;
-  --color-base-text: #3D2B1F;
-  --color-base-solid-button-labels: #FFFFFF;
-  --color-base-accent-1: #705645;
+  --color-base-text: #4a3424;
+  --color-base-background-1: #f6f3eb;
+  --color-base-background-2: #e8e2d5;
+  --color-base-solid-button-labels: #ffffff;
+  --color-base-accent-1: #8c6b5d;
+  --color-base-accent-2: #a48475;
+
   --font-heading-family: 'Playfair Display', serif;
-  --font-body-family: 'Helvetica Neue', sans-serif;
+  --font-body-family: 'Inter', sans-serif;
 }
 
-body {
-  background-color: var(--color-base-background-1);
-  color: var(--color-base-text);
-  font-family: var(--font-body-family);
+body, html {
+  background-color: var(--color-base-background-1) !important;
+  color: var(--color-base-text) !important;
+  font-family: var(--font-body-family) !important;
 }
 
-h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
-  font-family: var(--font-heading-family);
-  font-weight: 400;
-  letter-spacing: 0.05em;
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: var(--font-heading-family) !important;
+  color: var(--color-base-text) !important;
 }
 
 .button, .btn {
-  background-color: var(--color-base-accent-1);
-  color: var(--color-base-solid-button-labels);
+  background-color: var(--color-base-accent-1) !important;
+  color: #fff !important;
   border-radius: 4px;
+  font-family: var(--font-body-family);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-size: 0.85rem;
-  padding: 12px 24px;
-  border: none;
+  letter-spacing: 1px;
 }
