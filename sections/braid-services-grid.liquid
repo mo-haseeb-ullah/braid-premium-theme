@@ -1,4 +1,4 @@
-<section class="braid-services-section">
+ï»¿<section class="braid-services-section">
   <div class="services-container">
     
     <!-- Top Row: Title and Text -->
@@ -7,7 +7,7 @@
         <h2 class="services-title">{{ section.settings.title | default: 'Our Services' }}</h2>
       </div>
       <div class="services-text-col">
-        <p class="services-text">{{ section.settings.text | default: 'Whether you’re going for a protective look, a bold transformation, or a signature everyday style — our expert braiders have you covered. Choose your look, reserve your time, and let us handle the rest.' }}</p>
+        <p class="services-text">{{ section.settings.text | default: 'Whether youï¿½re going for a protective look, a bold transformation, or a signature everyday style ï¿½ our expert braiders have you covered. Choose your look, reserve your time, and let us handle the rest.' }}</p>
       </div>
     </div>
 
@@ -75,13 +75,13 @@
   /* Header Layout */
   .services-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: flex-start;
     margin-bottom: 4rem;
-    gap: 4rem;
+    gap: 8rem;
   }
   .services-title-col {
-    flex: 1;
+    flex: 0 0 auto;
   }
   .services-title {
     font-family: var(--font-heading-family);
@@ -91,15 +91,15 @@
     margin: 0;
   }
   .services-text-col {
-    flex: 1;
+    flex: 0 0 auto;
   }
   .services-text {
     font-family: var(--font-body-family);
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     line-height: 1.6;
     color: var(--color-base-text);
     margin: 0;
-    max-width: 600px;
+    max-width: 700px;
   }
 
   /* Grid Layout */
@@ -235,3 +235,4 @@
   ]
 }
 {% endschema %}
+
