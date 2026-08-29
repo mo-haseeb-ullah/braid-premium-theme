@@ -1,4 +1,4 @@
-<section class="braid-about-section">
+ï»¿<section class="braid-about-section">
   <div class="about-container">
     <div class="about-image-col">
       {% if section.settings.image != blank %}
@@ -12,7 +12,7 @@
     <div class="about-text-col">
       <h2 class="about-title">{{ section.settings.title | default: 'About Braid<em>Theory</em>' }}</h2>
       <div class="about-text">
-        {{ section.settings.text | default: '<p>Braiding isn’t just a hairstyle — it’s a legacy.</p><p>At Braid<em>Theory</em>, we celebrate the art, care, and culture behind every braid. From luxury braided wigs to custom in-studio styles, we’re here to help you express your beauty, protect your crown, and wear your roots with pride.</p>' }}
+        {{ section.settings.text | default: '<p>Braiding isnï¿½t just a hairstyle ï¿½ itï¿½s a legacy.</p><p>At Braid<em>Theory</em>, we celebrate the art, care, and culture behind every braid. From luxury braided wigs to custom in-studio styles, weï¿½re here to help you express your beauty, protect your crown, and wear your roots with pride.</p>' }}
       </div>
       <a href="{{ section.settings.button_link }}" class="btn about-btn">{{ section.settings.button_text | default: 'More About Us' }}</a>
     </div>
@@ -37,7 +37,7 @@
   }
   .about-img {
     width: 100%;
-    height: auto;
+    height: 600px;
     border-radius: 16px;
     object-fit: cover;
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
@@ -60,7 +60,7 @@
   }
   .about-text {
     font-family: var(--font-body-family);
-    font-size: 1.05rem;
+    font-size: 1.15rem;
     font-weight: 400;
     line-height: 1.6;
     color: var(--color-base-text);
@@ -133,3 +133,4 @@
   ]
 }
 {% endschema %}
+
