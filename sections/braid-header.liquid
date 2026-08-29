@@ -1,7 +1,7 @@
 <header class="braid-header">
   <div class="header-container">
     
-    <!-- Left Navigation (Hardcoded Demo Links) -->
+    <!-- Left Navigation -->
     <nav class="header-nav-left">
       <a href="/" class="header-link">Home</a>
       <a href="/collections/all" class="header-link">Shop</a>
@@ -19,37 +19,37 @@
         {% if section.settings.logo != blank %}
           <img src="{{ section.settings.logo | img_url: '400x' }}" alt="{{ shop.name }}">
         {% else %}
-          <span class="logo-text" style="font-family: var(--font-heading-family); font-size: 2.2rem; font-weight: 400; color: #ffffff;">braid<em style="font-style:italic;font-weight:300;">theory</em></span>
+          <span class="logo-text">braid<em>theory</em></span>
         {% endif %}
       </a>
     </div>
     
     <!-- Right Icons -->
     <div class="header-icons-right">
-      <a href="/search" class="header-icon"><svg viewBox="0 0 20 20" class="icon icon-search" style="width:20px;height:20px;"><path fill-rule="evenodd" d="M8.5 2a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8.5a8.5 8.5 0 1115.358 5.444l4.5 4.5a1 1 0 01-1.414 1.414l-4.5-4.5A8.5 8.5 0 010 8.5z" fill="currentColor"></path></svg></a>
-      <a href="/account" class="header-icon"><svg viewBox="0 0 20 20" class="icon icon-account" style="width:22px;height:22px;"><path d="M10 9a4 4 0 100-8 4 4 0 000 8zm0-2a2 2 0 110-4 2 2 0 010 4zM4.093 16C4.542 13.791 6.522 12 10 12s5.458 1.791 5.907 4H4.093zM2.03 16.488C2.868 12.83 6.07 10 10 10s7.132 2.83 7.97 6.488A1 1 0 0117.001 18H2.999a1 1 0 01-.97-1.512z" fill="currentColor"></path></svg></a>
-      <a href="/cart" class="header-icon"><svg viewBox="0 0 20 20" class="icon icon-cart" style="width:22px;height:22px;"><path fill-rule="evenodd" d="M14 6V4a4 4 0 10-8 0v2H2v10a2 2 0 002 2h12a2 2 0 002-2V6h-4zm-2 0H8V4a2 2 0 114 0v2zm4 2H4v8h12V8z" fill="currentColor"></path></svg></a>
+      <a href="/search" class="header-icon"><svg viewBox="0 0 20 20" style="width:20px;height:20px;"><path fill-rule="evenodd" d="M8.5 2a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8.5a8.5 8.5 0 1115.358 5.444l4.5 4.5a1 1 0 01-1.414 1.414l-4.5-4.5A8.5 8.5 0 010 8.5z" fill="currentColor"></path></svg></a>
+      <a href="/account" class="header-icon"><svg viewBox="0 0 20 20" style="width:22px;height:22px;"><path d="M10 9a4 4 0 100-8 4 4 0 000 8zm0-2a2 2 0 110-4 2 2 0 010 4zM4.093 16C4.542 13.791 6.522 12 10 12s5.458 1.791 5.907 4H4.093zM2.03 16.488C2.868 12.83 6.07 10 10 10s7.132 2.83 7.97 6.488A1 1 0 0117.001 18H2.999a1 1 0 01-.97-1.512z" fill="currentColor"></path></svg></a>
+      <a href="/cart" class="header-icon"><svg viewBox="0 0 20 20" style="width:22px;height:22px;"><path fill-rule="evenodd" d="M14 6V4a4 4 0 10-8 0v2H2v10a2 2 0 002 2h12a2 2 0 002-2V6h-4zm-2 0H8V4a2 2 0 114 0v2zm4 2H4v8h12V8z" fill="currentColor"></path></svg></a>
     </div>
     
   </div>
 </header>
 
 <style>
-  /* Force global transparent header wrapper */
-  #shopify-section-header, .shopify-section-header, #shopify-section-header-group {
+  /* Header wrapper - always on top, transparent */
+  #shopify-section-header, .shopify-section-header, [id*="header-group"] {
     position: absolute !important;
     top: 0;
     left: 0;
     width: 100% !important;
     z-index: 9999 !important;
     background: transparent !important;
-    background-color: transparent !important;
   }
 
   .braid-header {
     width: 100%;
     padding: 2.5rem 4rem;
     background: transparent !important;
+    transition: background-color 0.3s ease;
   }
   
   .header-container {
@@ -65,18 +65,19 @@
     gap: 1.8rem;
   }
 
+  /* DEFAULT: Brown text (visible on cream pages) */
   .header-link {
     text-decoration: none;
-    color: #ffffff !important;
+    color: #4a3424 !important;
     font-family: var(--font-body-family);
     font-size: 1.15rem;
     font-weight: 300;
     letter-spacing: 0.5px;
     text-transform: capitalize;
+    transition: color 0.3s ease, opacity 0.3s ease;
   }
-  
   .header-link:hover {
-    opacity: 0.7;
+    opacity: 0.6;
   }
 
   .header-logo {
@@ -85,6 +86,17 @@
   }
   .header-logo a {
     text-decoration: none;
+  }
+  .logo-text {
+    font-family: var(--font-heading-family);
+    font-size: 2.2rem;
+    font-weight: 400;
+    color: #4a3424;
+    transition: color 0.3s ease;
+  }
+  .logo-text em {
+    font-style: italic;
+    font-weight: 300;
   }
 
   .header-icons-right {
@@ -95,29 +107,16 @@
   }
 
   .header-icon {
-    color: #ffffff !important;
-    transition: opacity 0.3s;
+    color: #4a3424 !important;
+    transition: color 0.3s ease, opacity 0.3s ease;
   }
   .header-icon:hover {
-    opacity: 0.7;
+    opacity: 0.6;
   }
 
   @media screen and (max-width: 768px) {
     .header-nav-left { display: none; }
     .braid-header { padding: 1.5rem 2rem; }
-  }
-
-  /* Hover effect for the entire header */
-  #shopify-section-header:hover, .shopify-section-header:hover, #shopify-section-header-group:hover, .braid-header:hover {
-    background-color: #ffffff !important;
-    transition: background-color 0.3s ease;
-  }
-  
-  /* When header is hovered, change all text and icons to brown */
-  .braid-header:hover .header-link,
-  .braid-header:hover .header-icon,
-  .braid-header:hover .logo-text {
-    color: #4a3424 !important;
   }
 </style>
 
@@ -133,5 +132,3 @@
   ]
 }
 {% endschema %}
-
-

@@ -13,17 +13,25 @@
 </section>
 
 <style>
-  #shopify-section-header, .shopify-section-header, [id*="header-group"] {
-    position: absolute !important;
-    top: 0;
-    left: 0;
-    width: 100% !important;
-    z-index: 9999 !important;
-    background: transparent !important;
+  /* HOMEPAGE ONLY: Override header to white text over hero image */
+  .braid-header .header-link {
+    color: #ffffff !important;
   }
-  .header-wrapper {
-    background: transparent !important;
-    border-bottom: none !important;
+  .braid-header .logo-text {
+    color: #ffffff !important;
+  }
+  .braid-header .header-icon {
+    color: #ffffff !important;
+  }
+
+  /* HOMEPAGE ONLY: White background on hover */
+  .braid-header:hover {
+    background-color: #ffffff !important;
+  }
+  .braid-header:hover .header-link,
+  .braid-header:hover .header-icon,
+  .braid-header:hover .logo-text {
+    color: #4a3424 !important;
   }
 
   .braid-hero-section {
