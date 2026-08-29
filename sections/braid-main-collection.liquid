@@ -1,0 +1,167 @@
+<section class="braid-main-collection" style="background-color: var(--color-base-background-1);">
+  <div class="collection-page-container">
+    
+    <header class="collection-header">
+      <h1 class="collection-title">{{ collection.title | escape }}</h1>
+    </header>
+
+    <div class="collection-toolbar">
+      <div class="toolbar-left">
+        <span class="filter-label">Availability ?</span>
+        <span class="filter-label">Price ?</span>
+      </div>
+      <div class="toolbar-right">
+        <span class="product-count">{{ collection.products_count }} items</span>
+        <span class="filter-label">Sort ?</span>
+        <div class="grid-icons">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="collection-product-grid">
+      {% for product in collection.products %}
+        <a href="{{ product.url }}" class="product-card">
+          <div class="product-image-wrapper">
+            {% if product.featured_image != blank %}
+              <img src="{{ product.featured_image | img_url: '600x' }}" alt="{{ product.title | escape }}" class="product-img">
+            {% else %}
+              {{ 'product-1' | placeholder_svg_tag: 'product-placeholder' }}
+            {% endif %}
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">{{ product.title }}</h3>
+            <span class="product-price">{{ product.price | money }}</span>
+          </div>
+        </a>
+      {% else %}
+        <!-- Dummy products for the preview -->
+        {% for i in (1..4) %}
+          <div class="product-card">
+            <div class="product-image-wrapper">
+              {{ 'product-' | append: i | placeholder_svg_tag: 'product-placeholder' }}
+            </div>
+            <div class="product-info">
+              <h3 class="product-title">Premium Braids {{ i }}</h3>
+              <span class="product-price">.00</span>
+            </div>
+          </div>
+        {% endfor %}
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .braid-main-collection {
+    padding: 10rem 4rem 6rem;
+    min-height: 80vh;
+  }
+  .collection-page-container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .collection-header {
+    margin-bottom: 3rem;
+  }
+  .collection-title {
+    font-size: 4.5rem;
+    font-family: var(--font-heading-family);
+    color: var(--color-base-text);
+    font-weight: 400;
+    margin: 0;
+  }
+  .collection-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    padding-bottom: 1rem;
+    margin-bottom: 3rem;
+    font-size: 0.9rem;
+  }
+  .toolbar-left, .toolbar-right {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+  .filter-label {
+    cursor: pointer;
+  }
+  .product-count {
+    opacity: 0.6;
+  }
+  .grid-icons {
+    display: flex;
+    gap: 10px;
+    color: #666;
+  }
+  
+  .collection-product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+  }
+  .product-card {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  .product-image-wrapper {
+    width: 100%;
+    aspect-ratio: 4/5;
+    background-color: #E6E2DA;
+    margin-bottom: 1rem;
+    overflow: hidden;
+  }
+  .product-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  .product-card:hover .product-img {
+    transform: scale(1.05);
+  }
+  .product-placeholder {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .product-info {
+    text-align: left;
+  }
+  .product-title {
+    font-family: var(--font-heading-family);
+    font-size: 1.4rem;
+    margin: 0 0 0.3rem 0;
+    font-weight: 400;
+  }
+  .product-price {
+    font-size: 0.9rem;
+    opacity: 0.7;
+    font-family: var(--font-body-family);
+  }
+
+  @media screen and (max-width: 1024px) {
+    .collection-product-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media screen and (max-width: 768px) {
+    .braid-main-collection { padding: 8rem 2rem 4rem; }
+    .collection-title { font-size: 3rem; }
+    .toolbar-right { display: none; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Braid Collection Grid",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Braid Collection Grid"
+    }
+  ]
+}
+{% endschema %}

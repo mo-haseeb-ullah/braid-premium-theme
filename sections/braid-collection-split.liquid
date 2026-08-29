@@ -1,0 +1,205 @@
+<section class="braid-collection-split" style="background-color: var(--color-base-background-1);">
+  <div class="collection-split-container">
+    
+    <!-- Left Image -->
+    <div class="collection-image-wrapper">
+      {% if section.settings.image_left != blank %}
+        <img src="{{ section.settings.image_left | img_url: '800x' }}" class="collection-img">
+      {% else %}
+        {{ 'product-1' | placeholder_svg_tag: 'collection-placeholder' }}
+      {% endif %}
+    </div>
+
+    <!-- Center Content -->
+    <div class="collection-content">
+      <h2 class="collection-title">{{ section.settings.heading }}</h2>
+      <p class="collection-subtitle">{{ section.settings.subtitle }}</p>
+      
+      <div class="collection-accordion">
+        {% for block in section.blocks %}
+          <details class="accordion-item">
+            <summary class="accordion-title">
+              {{ block.settings.title }}
+              <span class="accordion-icon">+</span>
+            </summary>
+            <div class="accordion-content">
+              {{ block.settings.text }}
+            </div>
+          </details>
+        {% endfor %}
+      </div>
+      
+      {% if section.settings.button_label != blank %}
+        <a href="{{ section.settings.button_link }}" class="btn collection-btn">{{ section.settings.button_label }}</a>
+      {% endif %}
+    </div>
+
+    <!-- Right Image -->
+    <div class="collection-image-wrapper">
+      {% if section.settings.image_right != blank %}
+        <img src="{{ section.settings.image_right | img_url: '800x' }}" class="collection-img">
+      {% else %}
+        {{ 'product-2' | placeholder_svg_tag: 'collection-placeholder' }}
+      {% endif %}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .braid-collection-split {
+    padding: 8rem 4rem;
+  }
+  .collection-split-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+  }
+  .collection-image-wrapper {
+    flex: 1;
+    border-radius: 20px;
+    overflow: hidden;
+    aspect-ratio: 4/5;
+    background-color: #E6E2DA; /* Slightly darker cream for contrast */
+  }
+  .collection-img, .collection-placeholder {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .collection-content {
+    flex: 1.2;
+    text-align: center;
+    padding: 0 2rem;
+  }
+  .collection-title {
+    font-size: 2.5rem;
+    font-family: var(--font-heading-family);
+    margin-bottom: 0.5rem;
+    color: var(--color-base-text);
+  }
+  .collection-subtitle {
+    font-size: 1rem;
+    margin-bottom: 3rem;
+    color: #666;
+  }
+  
+  /* Accordion Styles */
+  .collection-accordion {
+    text-align: left;
+    margin-bottom: 3rem;
+  }
+  .accordion-item {
+    border-top: 1px solid rgba(0,0,0,0.1);
+  }
+  .accordion-item:last-child {
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+  }
+  .accordion-title {
+    padding: 1.5rem 0;
+    font-size: 1.1rem;
+    cursor: pointer;
+    list-style: none; /* Hide default arrow */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .accordion-title::-webkit-details-marker {
+    display: none;
+  }
+  .accordion-content {
+    padding-bottom: 1.5rem;
+    color: #555;
+    line-height: 1.6;
+  }
+  
+  .collection-btn {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  @media screen and (max-width: 1024px) {
+    .collection-split-container {
+      flex-direction: column;
+    }
+    .collection-image-wrapper {
+      width: 100%;
+      max-width: 500px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Braid Collection Split",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "New collection"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Discover our latest premium additions"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_left",
+      "label": "Left Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_right",
+      "label": "Right Image"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Buy now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "accordion",
+      "name": "Accordion Item",
+      "limit": 5,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Materials"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Content",
+          "default": "<p>Made from 100% premium synthetic fibers.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Braid Collection Split",
+      "blocks": [
+        { "type": "accordion", "settings": { "title": "Materials" } },
+        { "type": "accordion", "settings": { "title": "What You Get" } },
+        { "type": "accordion", "settings": { "title": "How To Use" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

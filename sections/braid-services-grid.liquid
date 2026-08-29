@@ -1,0 +1,182 @@
+<section class="braid-services" style="background-color: var(--color-base-background-1);">
+  <div class="services-header">
+    <h2 class="services-title">{{ section.settings.heading }}</h2>
+    <p class="services-description">{{ section.settings.description }}</p>
+  </div>
+
+  <div class="services-grid">
+    {% for block in section.blocks %}
+      <div class="service-card">
+        <div class="service-image-wrapper">
+          {% if block.settings.image != blank %}
+            <img src="{{ block.settings.image | img_url: '600x' }}" alt="{{ block.settings.title }}" class="service-img">
+          {% else %}
+            {{ 'image' | placeholder_svg_tag: 'service-placeholder' }}
+          {% endif %}
+        </div>
+        <div class="service-info">
+          <h3 class="service-name">{{ block.settings.title }}</h3>
+          <span class="service-price">{{ block.settings.price }}</span>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  {% if section.settings.button_label != blank %}
+    <div class="services-footer">
+      <a href="{{ section.settings.button_link }}" class="btn services-btn">{{ section.settings.button_label }}</a>
+    </div>
+  {% endif %}
+</section>
+
+<style>
+  .braid-services {
+    padding: 6rem 4rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .services-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 4rem;
+  }
+  .services-title {
+    font-size: 3rem;
+    margin: 0;
+    width: 40%;
+    color: #ae754a; /* Golden brown accent */
+  }
+  .services-description {
+    width: 50%;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  .service-card {
+    display: flex;
+    flex-direction: column;
+  }
+  .service-image-wrapper {
+    width: 100%;
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+  }
+  .service-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  .service-card:hover .service-img {
+    transform: scale(1.05);
+  }
+  .service-placeholder {
+    width: 100%;
+    height: 100%;
+    background-color: #e8e8e1;
+  }
+  .service-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-top: 1px solid rgba(0,0,0,0.1);
+    padding-top: 1rem;
+  }
+  .service-name {
+    font-size: 1rem;
+    margin: 0;
+    font-family: var(--font-body-family);
+  }
+  .service-price {
+    font-size: 0.9rem;
+    opacity: 0.7;
+  }
+  .services-footer {
+    text-align: center;
+    margin-top: 4rem;
+  }
+  @media screen and (max-width: 900px) {
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .services-header { flex-direction: column; }
+    .services-title, .services-description { width: 100%; margin-bottom: 2rem; }
+  }
+  @media screen and (max-width: 500px) {
+    .services-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Braid Services Grid",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Our Services"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Premium styling services tailored for modern women."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Book Appointment"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "service",
+      "name": "Service Card",
+      "limit": 8,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Service Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Service Name",
+          "default": "Knotless Braids"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price/Duration",
+          "default": "+"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Braid Services Grid",
+      "blocks": [
+        { "type": "service" },
+        { "type": "service" },
+        { "type": "service" },
+        { "type": "service" }
+      ]
+    }
+  ]
+}
+{% endschema %}

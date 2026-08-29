@@ -1,0 +1,204 @@
+<section class="braid-main-blog" style="background-color: var(--color-base-background-1);">
+  <div class="blog-container">
+    
+    <header class="blog-header">
+      <h1 class="blog-title">{{ blog.title | escape }}</h1>
+    </header>
+
+    <div class="blog-articles">
+      {% for article in blog.articles %}
+        {% if forloop.first %}
+          <!-- Featured Article (First one) -->
+          <article class="article-featured">
+            <a href="{{ article.url }}" class="article-image-link featured-img-wrapper">
+              {% if article.image != blank %}
+                <img src="{{ article.image | img_url: '1200x' }}" alt="{{ article.title }}" class="article-img">
+              {% else %}
+                {{ 'lifestyle-1' | placeholder_svg_tag: 'article-placeholder' }}
+              {% endif %}
+            </a>
+            <div class="article-content featured-content">
+              <h2 class="article-heading"><a href="{{ article.url }}">{{ article.title }}</a></h2>
+              <span class="article-date">{{ article.published_at | date: "%B %d, %Y" }}</span>
+              <p class="article-excerpt">
+                {% if article.excerpt.size > 0 %}
+                  {{ article.excerpt | strip_html | truncatewords: 30 }}
+                {% else %}
+                  {{ article.content | strip_html | truncatewords: 30 }}
+                {% endif %}
+              </p>
+              <a href="{{ article.url }}" class="article-read-more">Read more...</a>
+            </div>
+          </article>
+          
+          <div class="article-grid"> <!-- Start grid for remaining articles -->
+        {% else %}
+          <!-- Standard Grid Articles -->
+          <article class="article-standard">
+            <a href="{{ article.url }}" class="article-image-link standard-img-wrapper">
+              {% if article.image != blank %}
+                <img src="{{ article.image | img_url: '800x' }}" alt="{{ article.title }}" class="article-img">
+              {% else %}
+                {{ 'lifestyle-2' | placeholder_svg_tag: 'article-placeholder' }}
+              {% endif %}
+            </a>
+            <div class="article-content">
+              <h2 class="article-heading"><a href="{{ article.url }}">{{ article.title }}</a></h2>
+              <span class="article-date">{{ article.published_at | date: "%B %d, %Y" }}</span>
+              <p class="article-excerpt">
+                {% if article.excerpt.size > 0 %}
+                  {{ article.excerpt | strip_html | truncatewords: 20 }}
+                {% else %}
+                  {{ article.content | strip_html | truncatewords: 20 }}
+                {% endif %}
+              </p>
+              <a href="{{ article.url }}" class="article-read-more">Read more...</a>
+            </div>
+          </article>
+        {% endif %}
+      {% else %}
+        <!-- Dummy Content for Preview -->
+        <article class="article-featured">
+          <div class="article-image-link featured-img-wrapper">
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'article-placeholder' }}
+          </div>
+          <div class="article-content featured-content">
+            <h2 class="article-heading">How to Choose the Perfect Braid Color</h2>
+            <span class="article-date">June 30, 2026</span>
+            <p class="article-excerpt">Choosing the right braid color can elevate your entire look — but with so many beautiful shades out there, where do you start?</p>
+            <span class="article-read-more">Read more...</span>
+          </div>
+        </article>
+        <div class="article-grid">
+          <article class="article-standard">
+            <div class="article-image-link standard-img-wrapper">
+              {{ 'lifestyle-2' | placeholder_svg_tag: 'article-placeholder' }}
+            </div>
+            <div class="article-content">
+              <h2 class="article-heading">5 Ways to Keep Your Scalp Healthy</h2>
+              <span class="article-date">June 30, 2026</span>
+              <p class="article-excerpt">Braids are protective — but your scalp still needs love. Here's how to keep it fresh.</p>
+              <span class="article-read-more">Read more...</span>
+            </div>
+          </article>
+          <article class="article-standard">
+            <div class="article-image-link standard-img-wrapper">
+              {{ 'lifestyle-1' | placeholder_svg_tag: 'article-placeholder' }}
+            </div>
+            <div class="article-content">
+              <h2 class="article-heading">Vacation-Ready Styles: Best Braids</h2>
+              <span class="article-date">June 30, 2026</span>
+              <p class="article-excerpt">No one wants to be messing with their hair while on vacation. Here are our top picks.</p>
+              <span class="article-read-more">Read more...</span>
+            </div>
+          </article>
+      {% endfor %}
+      
+      </div> <!-- End grid -->
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .braid-main-blog {
+    padding: 10rem 4rem 6rem;
+  }
+  .blog-container {
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+  .blog-title {
+    font-size: 4.5rem;
+    font-family: var(--font-heading-family);
+    margin-bottom: 4rem;
+    font-weight: 400;
+  }
+  
+  .article-featured {
+    display: flex;
+    gap: 4rem;
+    margin-bottom: 4rem;
+    align-items: flex-start;
+  }
+  .featured-img-wrapper {
+    flex: 2;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    background-color: #E6E2DA;
+  }
+  .featured-content {
+    flex: 1;
+  }
+  
+  .article-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4rem;
+  }
+  .standard-img-wrapper {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    background-color: #E6E2DA;
+    margin-bottom: 1.5rem;
+  }
+  
+  .article-img, .article-placeholder {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  .article-image-link:hover .article-img {
+    transform: scale(1.03);
+  }
+  
+  .article-heading {
+    font-size: 1.8rem;
+    font-family: var(--font-heading-family);
+    margin: 0 0 0.5rem 0;
+  }
+  .article-heading a {
+    text-decoration: none;
+    color: var(--color-base-text);
+  }
+  .article-date {
+    font-size: 0.9rem;
+    opacity: 0.6;
+    display: block;
+    margin-bottom: 1rem;
+  }
+  .article-excerpt {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #444;
+    margin-bottom: 1.5rem;
+  }
+  .article-read-more {
+    font-size: 0.9rem;
+    color: var(--color-base-text);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-base-text);
+    padding-bottom: 2px;
+  }
+  
+  @media screen and (max-width: 900px) {
+    .article-featured { flex-direction: column; gap: 2rem; }
+    .article-grid { grid-template-columns: 1fr; }
+    .blog-title { font-size: 3.5rem; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Braid Blog Layout",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Braid Blog Layout"
+    }
+  ]
+}
+{% endschema %}

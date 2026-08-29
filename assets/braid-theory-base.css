@@ -1,0 +1,31 @@
+:root {
+  --color-base-background-1: #F5EFEB;
+  --color-base-text: #3D2B1F;
+  --color-base-solid-button-labels: #FFFFFF;
+  --color-base-accent-1: #705645;
+  --font-heading-family: 'Playfair Display', serif;
+  --font-body-family: 'Helvetica Neue', sans-serif;
+}
+
+body {
+  background-color: var(--color-base-background-1);
+  color: var(--color-base-text);
+  font-family: var(--font-body-family);
+}
+
+h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
+  font-family: var(--font-heading-family);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+}
+
+.button, .btn {
+  background-color: var(--color-base-accent-1);
+  color: var(--color-base-solid-button-labels);
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.85rem;
+  padding: 12px 24px;
+  border: none;
+}

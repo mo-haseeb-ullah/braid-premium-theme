@@ -1,0 +1,122 @@
+<footer class="braid-footer" style="background-color: var(--color-base-background-1);">
+  <div class="footer-top">
+    
+    <div class="footer-newsletter">
+      <h3 class="footer-title">Join the club</h3>
+      <p class="footer-text">Get the latest trends and product news delivered.</p>
+      <form class="newsletter-form">
+        <input type="email" placeholder="Email address" class="newsletter-input">
+        <button type="submit" class="newsletter-btn">?</button>
+      </form>
+    </div>
+
+    <div class="footer-links">
+      <ul class="footer-menu">
+        <li><a href="#">Returns & exchanges</a></li>
+        <li><a href="#">Shipping info</a></li>
+        <li><a href="#">Terms of service</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom-logo">
+    {{ section.settings.large_text }}
+  </div>
+  
+  <div class="footer-copyright">
+    <p>&copy; {{ 'now' | date: "%Y" }} {{ shop.name }}. Powered by Shopify.</p>
+  </div>
+</footer>
+
+<style>
+  .braid-footer {
+    padding: 6rem 4rem 2rem;
+    border-top: 1px solid rgba(0,0,0,0.05);
+  }
+  .footer-top {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto 6rem;
+  }
+  .footer-newsletter {
+    flex: 1;
+  }
+  .footer-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-family: var(--font-body-family);
+  }
+  .newsletter-form {
+    display: flex;
+    margin-top: 1.5rem;
+    max-width: 300px;
+    border-bottom: 1px solid var(--color-base-text);
+  }
+  .newsletter-input {
+    background: transparent;
+    border: none;
+    padding: 10px 0;
+    flex: 1;
+    outline: none;
+  }
+  .newsletter-btn {
+    background: transparent;
+    color: var(--color-base-text);
+    padding: 0 10px;
+    margin: 0;
+    box-shadow: none;
+  }
+  .footer-links {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .footer-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .footer-menu li {
+    margin-bottom: 0.8rem;
+  }
+  .footer-menu a {
+    text-decoration: none;
+    color: var(--color-base-text);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .footer-bottom-logo {
+    text-align: center;
+    font-size: 15vw;
+    font-family: var(--font-heading-family);
+    line-height: 0.8;
+    color: #8c6a51; /* Muted brown */
+    margin-bottom: 4rem;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .footer-copyright {
+    text-align: left;
+    font-size: 0.75rem;
+    opacity: 0.6;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Braid Footer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "large_text",
+      "label": "Massive Footer Text",
+      "default": "braidtheory"
+    }
+  ]
+}
+{% endschema %}

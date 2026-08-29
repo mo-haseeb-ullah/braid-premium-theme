@@ -1,0 +1,159 @@
+<section class="braid-faq-split" style="background-color: var(--color-base-background-1);">
+  <div class="faq-container">
+    
+    <div class="faq-image-side">
+      {% if section.settings.image != blank %}
+        <img src="{{ section.settings.image | img_url: '1000x' }}" alt="FAQ Image" class="faq-img">
+      {% else %}
+        {{ 'lifestyle-2' | placeholder_svg_tag: 'faq-placeholder' }}
+      {% endif %}
+    </div>
+    
+    <div class="faq-text-side">
+      <h2 class="faq-title">{{ section.settings.heading }}</h2>
+      
+      <div class="faq-accordion-list">
+        {% for block in section.blocks %}
+          <details class="faq-item">
+            <summary class="faq-question">
+              {{ block.settings.question }}
+              <span class="faq-icon">?</span>
+            </summary>
+            <div class="faq-answer">
+              {{ block.settings.answer }}
+            </div>
+          </details>
+        {% endfor %}
+      </div>
+    </div>
+    
+  </div>
+</section>
+
+<style>
+  .braid-faq-split {
+    padding: 8rem 4rem;
+  }
+  .faq-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: flex;
+    align-items: flex-start;
+    gap: 6rem;
+  }
+  .faq-image-side {
+    flex: 1;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .faq-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+  }
+  .faq-placeholder {
+    width: 100%;
+    aspect-ratio: 4/5;
+    background-color: #E6E2DA;
+  }
+  
+  .faq-text-side {
+    flex: 1;
+    padding-top: 4rem;
+  }
+  .faq-title {
+    font-size: 2.2rem;
+    font-family: var(--font-heading-family);
+    margin-bottom: 3rem;
+    color: var(--color-base-text);
+    font-weight: 400;
+  }
+  
+  .faq-accordion-list {
+    width: 100%;
+  }
+  .faq-item {
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+  }
+  .faq-question {
+    padding: 1.5rem 0;
+    font-size: 1.1rem;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-heading-family);
+  }
+  .faq-question::-webkit-details-marker {
+    display: none;
+  }
+  .faq-icon {
+    font-size: 1.2rem;
+    opacity: 0.5;
+  }
+  .faq-answer {
+    padding-bottom: 1.5rem;
+    color: #666;
+    line-height: 1.6;
+    font-size: 0.95rem;
+  }
+  
+  @media screen and (max-width: 900px) {
+    .faq-container {
+      flex-direction: column;
+      gap: 3rem;
+    }
+    .faq-text-side { padding-top: 0; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Braid FAQ Split",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Side Image"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "FAQs – Frequently Asked Questions"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "FAQ Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "Return policy"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>We accept returns within 30 days of purchase.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Braid FAQ Split",
+      "blocks": [
+        { "type": "faq", "settings": { "question": "Return policy" } },
+        { "type": "faq", "settings": { "question": "Shipping" } },
+        { "type": "faq", "settings": { "question": "Manufacturing" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
