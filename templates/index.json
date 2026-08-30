@@ -17,9 +17,40 @@
     },
     "braid_services": {
       "type": "braid-services-grid",
+      "blocks": {
+        "service_1": {
+          "type": "service",
+          "settings": {
+            "title": "Knotless Braids",
+            "price": "$180.00"
+          }
+        },
+        "service_2": {
+          "type": "service",
+          "settings": {
+            "title": "Goddess Braids",
+            "price": "$150.00"
+          }
+        },
+        "service_3": {
+          "type": "service",
+          "settings": {
+            "title": "Cornrows with Design",
+            "price": "$90.00"
+          }
+        },
+        "service_4": {
+          "type": "service",
+          "settings": {
+            "title": "Boho Braids",
+            "price": "$220.00"
+          }
+        }
+      },
+      "block_order": ["service_1", "service_2", "service_3", "service_4"],
       "settings": {
         "title": "Our Services",
-        "text": "Whether you’re going for a protective look, a bold transformation, or a signature everyday style — our expert braiders have you covered. Choose your look, reserve your time, and let us handle the rest.",
+        "text": "Whether you are going for a protective look, a bold transformation, or a signature everyday style &mdash; our expert braiders have you covered. Choose your look, reserve your time, and let us handle the rest.",
         "button_text": "View Full Service Menu",
         "button_link": ""
       }
