@@ -5,20 +5,138 @@
       <h1 class="collection-title">{{ collection.title | escape }}</h1>
     </header>
 
-    <div class="collection-toolbar">
+    <form class="collection-toolbar" id="CollectionFiltersForm" method="GET">
       <div class="toolbar-left">
-        <span class="filter-label">Availability <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 5L5 1L9 5" stroke="currentColor" stroke-width="1.2"/></svg></span>
-        <span class="filter-label">Price <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.2"/></svg></span>
+        {%- for filter in collection.filters -%}
+          <details class="filter-dropdown">
+            <summary class="filter-label">
+              {{ filter.label }}
+              <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.2"/></svg>
+            </summary>
+            <div class="filter-dropdown-content">
+              {%- case filter.type -%}
+                {%- when 'boolean' or 'list' -%}
+                  <ul class="filter-list">
+                    {%- for filter_value in filter.values -%}
+                      <li>
+                        <label class="filter-checkbox-label">
+                          <input type="checkbox"
+                            name="{{ filter_value.param_name }}"
+                            value="{{ filter_value.value }}"
+                            {% if filter_value.active %}checked{% endif %}
+                          >
+                          <span class="checkbox-custom"></span>
+                          <span>{{ filter_value.label }}</span>
+                        </label>
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                {%- when 'price_range' -%}
+                  <div class="filter-price-range">
+                    <div class="price-inputs">
+                      <div class="price-field">
+                        <span class="currency-symbol">{{ cart.currency.symbol }}</span>
+                        <input name="{{ filter.min_value.param_name }}"
+                          type="number"
+                          placeholder="0"
+                          min="0"
+                          max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                          {% if filter.min_value.value %}value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"{% endif %}
+                        >
+                      </div>
+                      <span class="price-separator">to</span>
+                      <div class="price-field">
+                        <span class="currency-symbol">{{ cart.currency.symbol }}</span>
+                        <input name="{{ filter.max_value.param_name }}"
+                          type="number"
+                          placeholder="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                          min="0"
+                          max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                          {% if filter.max_value.value %}value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"{% endif %}
+                        >
+                      </div>
+                    </div>
+                    <div class="price-max-text">The highest price is {{ filter.range_max | money }}</div>
+                  </div>
+              {%- endcase -%}
+            </div>
+          </details>
+        {%- else -%}
+          <!-- Fallbacks if Search & Discovery filters are not configured yet -->
+          <details class="filter-dropdown">
+            <summary class="filter-label">Availability <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.2"/></svg></summary>
+            <div class="filter-dropdown-content">
+               <ul class="filter-list">
+                 <li><label class="filter-checkbox-label"><input type="checkbox"><span class="checkbox-custom"></span><span>In stock</span></label></li>
+                 <li><label class="filter-checkbox-label"><input type="checkbox" disabled><span class="checkbox-custom"></span><span style="opacity:0.5;">Out of stock</span></label></li>
+               </ul>
+            </div>
+          </details>
+          <details class="filter-dropdown">
+            <summary class="filter-label">Price <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.2"/></svg></summary>
+            <div class="filter-dropdown-content">
+               <div class="filter-price-range">
+                  <div class="price-inputs">
+                    <div class="price-field"><span class="currency-symbol">$</span><input type="number" placeholder="0"></div>
+                    <span class="price-separator">to</span>
+                    <div class="price-field"><span class="currency-symbol">$</span><input type="number" placeholder="220.00"></div>
+                  </div>
+                  <div class="price-max-text">The highest price is $220.00</div>
+               </div>
+            </div>
+          </details>
+        {%- endfor -%}
       </div>
+      
       <div class="toolbar-right">
         <span class="product-count">{{ collection.products_count }} items</span>
-        <span class="filter-label">Sort <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.2"/></svg></span>
+        <details class="filter-dropdown sort-dropdown">
+          <summary class="filter-label">
+            Sort <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.2"/></svg>
+          </summary>
+          <div class="filter-dropdown-content">
+            <ul class="filter-list">
+              {%- for option in collection.sort_options -%}
+                <li>
+                  <label class="filter-radio-label">
+                    <input type="radio" name="sort_by" value="{{ option.value }}" {% if option.value == collection.sort_by or option.value == collection.default_sort_by and collection.sort_by == blank %}checked{% endif %}>
+                    <span class="radio-text">
+                      {% if option.value == collection.sort_by or option.value == collection.default_sort_by and collection.sort_by == blank %}
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                      {% endif %}
+                      {{ option.name }}
+                    </span>
+                  </label>
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        </details>
         <div class="grid-icons">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="6" height="6"/><rect x="14" y="4" width="6" height="6"/><rect x="14" y="14" width="6" height="6"/><rect x="4" y="14" width="6" height="6"/></svg>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="4" height="4"/><rect x="10" y="3" width="4" height="4"/><rect x="17" y="3" width="4" height="4"/><rect x="3" y="10" width="4" height="4"/><rect x="10" y="10" width="4" height="4"/><rect x="17" y="10" width="4" height="4"/><rect x="3" y="17" width="4" height="4"/><rect x="10" y="17" width="4" height="4"/><rect x="17" y="17" width="4" height="4"/></svg>
+          <div class="grid-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="6" height="6"/><rect x="14" y="4" width="6" height="6"/><rect x="14" y="14" width="6" height="6"/><rect x="4" y="14" width="6" height="6"/></svg>
+          </div>
+          <div class="grid-icon active">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="4" height="4"/><rect x="10" y="3" width="4" height="4"/><rect x="17" y="3" width="4" height="4"/><rect x="3" y="10" width="4" height="4"/><rect x="10" y="10" width="4" height="4"/><rect x="17" y="10" width="4" height="4"/><rect x="3" y="17" width="4" height="4"/><rect x="10" y="17" width="4" height="4"/><rect x="17" y="17" width="4" height="4"/></svg>
+          </div>
         </div>
       </div>
-    </div>
+    </form>
+    
+    <script>
+      document.getElementById('CollectionFiltersForm').addEventListener('change', function() {
+        this.submit();
+      });
+      // Close details when clicking outside
+      document.addEventListener('click', function(event) {
+        const details = document.querySelectorAll('.filter-dropdown');
+        details.forEach(detail => {
+          if (detail.hasAttribute('open') && !detail.contains(event.target)) {
+            detail.removeAttribute('open');
+          }
+        });
+      });
+    </script>
 
     <div class="collection-product-grid">
       {% for product in collection.products %}
@@ -100,16 +218,132 @@
     align-items: center;
     gap: 6px;
     opacity: 0.8;
+    position: relative;
   }
+  .filter-dropdown {
+    position: relative;
+  }
+  .filter-dropdown summary {
+    list-style: none;
+  }
+  .filter-dropdown summary::-webkit-details-marker {
+    display: none;
+  }
+  .filter-dropdown-content {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    background: #F8F3EC;
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    z-index: 10;
+    min-width: 220px;
+    border: 1px solid rgba(140, 107, 93, 0.1);
+  }
+  .sort-dropdown .filter-dropdown-content {
+    left: auto;
+    right: 0;
+  }
+  .filter-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  .filter-checkbox-label, .filter-radio-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    color: var(--color-base-text);
+  }
+  .filter-checkbox-label input, .filter-radio-label input {
+    display: none;
+  }
+  .checkbox-custom {
+    width: 18px;
+    height: 18px;
+    border: 1px solid rgba(140, 107, 93, 0.3);
+    border-radius: 4px;
+    display: inline-block;
+    position: relative;
+    background: transparent;
+  }
+  .filter-checkbox-label input:checked + .checkbox-custom::after {
+    content: '';
+    position: absolute;
+    top: 2px; left: 6px;
+    width: 4px; height: 10px;
+    border: solid var(--color-base-text);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+  .radio-text {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  /* Price Range Styles */
+  .filter-price-range {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .price-inputs {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .price-field {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border-radius: 6px;
+    padding: 0.5rem;
+    border: 1px solid rgba(140, 107, 93, 0.2);
+  }
+  .price-field input {
+    border: none;
+    outline: none;
+    width: 60px;
+    background: transparent;
+    font-family: inherit;
+    font-size: 0.9rem;
+    color: var(--color-base-text);
+  }
+  .price-separator {
+    font-size: 0.9rem;
+    opacity: 0.6;
+  }
+  .price-max-text {
+    font-size: 0.85rem;
+    opacity: 0.6;
+  }
+  
   .product-count {
     opacity: 0.6;
   }
   .grid-icons {
     display: flex;
-    gap: 10px;
+    gap: 4px;
     color: var(--color-base-text);
     opacity: 0.6;
     cursor: pointer;
+  }
+  .grid-icon {
+    padding: 4px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .grid-icon.active {
+    background-color: rgba(140, 107, 93, 0.1);
+    opacity: 1;
   }
   
   .collection-product-grid {
