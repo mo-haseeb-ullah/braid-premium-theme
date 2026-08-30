@@ -1,0 +1,104 @@
+<section class="braid-image-marquee">
+  {% if section.settings.bg_image != blank %}
+    <img src="{{ section.settings.bg_image | img_url: '2000x' }}" alt="Marquee Background" class="image-marquee-bg">
+  {% else %}
+    <div class="image-marquee-bg placeholder-bg" style="background-color: #6C4F3D;"></div>
+  {% endif %}
+  <div class="image-marquee-overlay"></div>
+  
+  <div class="image-marquee-track">
+    <div class="image-marquee-content">
+      <span>{{ section.settings.text | default: 'Luxury Hair for Women Who Lead' }}</span>
+      <span>{{ section.settings.text | default: 'Luxury Hair for Women Who Lead' }}</span>
+      <span>{{ section.settings.text | default: 'Luxury Hair for Women Who Lead' }}</span>
+      <span>{{ section.settings.text | default: 'Luxury Hair for Women Who Lead' }}</span>
+      <span>{{ section.settings.text | default: 'Luxury Hair for Women Who Lead' }}</span>
+      <span>{{ section.settings.text | default: 'Luxury Hair for Women Who Lead' }}</span>
+      <span>{{ section.settings.text | default: 'Luxury Hair for Women Who Lead' }}</span>
+      <span>{{ section.settings.text | default: 'Luxury Hair for Women Who Lead' }}</span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .braid-image-marquee {
+    position: relative;
+    width: 100%;
+    padding: 3.5rem 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+  .image-marquee-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 1;
+  }
+  .image-marquee-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3); /* Subtle darkening for text readability */
+    z-index: 2;
+  }
+  .image-marquee-track {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    overflow: hidden;
+  }
+  .image-marquee-content {
+    display: flex;
+    gap: 3rem;
+    white-space: nowrap;
+    animation: image-marquee-scroll 15s linear infinite;
+  }
+  .image-marquee-content span {
+    font-family: var(--font-heading-family);
+    font-size: 2.2rem;
+    font-weight: 400;
+    color: #FFFFFF;
+    flex-shrink: 0;
+  }
+
+  @keyframes image-marquee-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  @media screen and (max-width: 768px) {
+    .braid-image-marquee { padding: 2.5rem 0; }
+    .image-marquee-content span { font-size: 1.6rem; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Image Marquee",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Scrolling Text",
+      "default": "Luxury Hair for Women Who Lead"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image Marquee"
+    }
+  ]
+}
+{% endschema %}

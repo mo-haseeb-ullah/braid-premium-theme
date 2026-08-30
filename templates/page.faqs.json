@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "faq": {
+      "type": "braid-faq-accordion",
+      "settings": {}
+    },
+    "marquee": {
+      "type": "braid-image-marquee",
+      "settings": {}
+    }
+  },
+  "order": [
+    "faq",
+    "marquee"
+  ]
+}
