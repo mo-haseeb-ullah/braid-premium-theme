@@ -15,7 +15,8 @@
       "type": "braid-header",
       "settings": {
         "hide_on_home": true,
-        "logo_text": "braidtheory"
+        "logo_text": "braidtheory",
+        "blog": "blog"
       }
     }
   },
