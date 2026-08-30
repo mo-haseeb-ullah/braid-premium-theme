@@ -17,50 +17,6 @@
     },
     "braid_services": {
       "type": "braid-services-grid",
-      "blocks": {
-        "service_KKHMW7": {
-          "type": "service",
-          "settings": {
-            "image": "shopify://shop_images/braid-image-100.png",
-            "title": "Service Name",
-            "price": "50",
-            "link": "shopify://products/goddess-braids"
-          }
-        },
-        "service_i83kfz": {
-          "type": "service",
-          "settings": {
-            "image": "shopify://shop_images/braid-image-101.png",
-            "title": "Service Name",
-            "price": "60",
-            "link": "shopify://products/goddess-braids"
-          }
-        },
-        "service_WtEGUE": {
-          "type": "service",
-          "settings": {
-            "image": "shopify://shop_images/braid-image-57.png",
-            "title": "Service Name",
-            "price": ".00",
-            "link": "shopify://products/goddess-braids"
-          }
-        },
-        "service_FiVF4P": {
-          "type": "service",
-          "settings": {
-            "image": "shopify://shop_images/braid-image-80.png",
-            "title": "Service Name",
-            "price": ".00",
-            "link": "shopify://products/goddess-braids"
-          }
-        }
-      },
-      "block_order": [
-        "service_KKHMW7",
-        "service_i83kfz",
-        "service_WtEGUE",
-        "service_FiVF4P"
-      ],
       "settings": {
         "title": "Our Services",
         "text": "Whether you’re going for a protective look, a bold transformation, or a signature everyday style — our expert braiders have you covered. Choose your look, reserve your time, and let us handle the rest.",
