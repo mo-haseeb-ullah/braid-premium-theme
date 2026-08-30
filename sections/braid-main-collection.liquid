@@ -113,10 +113,10 @@
           </div>
         </details>
         <div class="grid-icons">
-          <div class="grid-icon">
+          <div class="grid-icon grid-icon-2col" data-col="2">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="6" height="6"/><rect x="14" y="4" width="6" height="6"/><rect x="14" y="14" width="6" height="6"/><rect x="4" y="14" width="6" height="6"/></svg>
           </div>
-          <div class="grid-icon active">
+          <div class="grid-icon grid-icon-4col active" data-col="4">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="4" height="4"/><rect x="10" y="3" width="4" height="4"/><rect x="17" y="3" width="4" height="4"/><rect x="3" y="10" width="4" height="4"/><rect x="10" y="10" width="4" height="4"/><rect x="17" y="10" width="4" height="4"/><rect x="3" y="17" width="4" height="4"/><rect x="10" y="17" width="4" height="4"/><rect x="17" y="17" width="4" height="4"/></svg>
           </div>
         </div>
@@ -124,15 +124,42 @@
     </form>
     
     <script>
-      document.getElementById('CollectionFiltersForm').addEventListener('change', function() {
-        this.submit();
+      // Form auto-submit
+      document.getElementById('CollectionFiltersForm').addEventListener('change', function(e) {
+        // Prevent submit if changing a text input (wait for blur)
+        if(e.target.type !== 'number' && e.target.type !== 'text') {
+           this.submit();
+        } else {
+           // For number inputs, wait for them to lose focus before submitting
+           e.target.addEventListener('blur', () => { this.submit(); }, {once: true});
+        }
       });
+
       // Close details when clicking outside
       document.addEventListener('click', function(event) {
         const details = document.querySelectorAll('.filter-dropdown');
         details.forEach(detail => {
           if (detail.hasAttribute('open') && !detail.contains(event.target)) {
             detail.removeAttribute('open');
+          }
+        });
+      });
+
+      // Grid View Toggle Logic
+      document.querySelectorAll('.grid-icon').forEach(icon => {
+        icon.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          // Switch active state on buttons
+          document.querySelectorAll('.grid-icon').forEach(i => i.classList.remove('active'));
+          this.classList.add('active');
+          
+          // Switch grid columns
+          const grid = document.querySelector('.collection-product-grid');
+          if (this.getAttribute('data-col') === '2') {
+            grid.classList.add('grid-layout-2');
+          } else {
+            grid.classList.remove('grid-layout-2');
           }
         });
       });
@@ -350,6 +377,13 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
+    transition: all 0.3s ease;
+  }
+  .collection-product-grid.grid-layout-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .collection-product-grid.grid-layout-2 .product-image-wrapper {
+    aspect-ratio: 4/5;
   }
   .product-card {
     text-decoration: none;
