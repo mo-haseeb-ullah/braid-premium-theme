@@ -19,6 +19,7 @@
     "marquee": {
       "type": "braid-image-marquee",
       "settings": {
+        "bg_image": "shopify://shop_images/braid-image-24.png",
         "text": "Luxury Hair for Women Who Lead"
       }
     }
