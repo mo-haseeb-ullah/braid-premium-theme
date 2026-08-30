@@ -2,7 +2,13 @@
   <div class="collection-page-container">
     
     <header class="collection-header">
-      <h1 class="collection-title">{{ collection.title | escape }}</h1>
+      <h1 class="collection-title">
+        {% if section.settings.title_override != blank %}
+          {{ section.settings.title_override | escape }}
+        {% else %}
+          {{ collection.title | escape }}
+        {% endif %}
+      </h1>
     </header>
 
     <form class="collection-toolbar" id="CollectionFiltersForm" method="GET">
@@ -454,7 +460,14 @@
 {% schema %}
 {
   "name": "Braid Collection Grid",
-  "settings": [],
+  "settings": [
+    {
+      "type": "text",
+      "id": "title_override",
+      "label": "Heading Override",
+      "info": "Leave blank to automatically use the collection's name (e.g. 'Products'). Type 'Services' here to override it."
+    }
+  ],
   "presets": [
     {
       "name": "Braid Collection Grid"
