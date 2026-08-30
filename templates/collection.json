@@ -12,7 +12,7 @@
     "main": {
       "type": "braid-main-collection",
       "settings": {
-        "title_override": "Services"
+        "title_override": "Braids"
       }
     }
   },
