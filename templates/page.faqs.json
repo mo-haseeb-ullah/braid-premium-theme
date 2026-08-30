@@ -11,11 +11,16 @@
   "sections": {
     "faq": {
       "type": "braid-faq-accordion",
-      "settings": {}
+      "settings": {
+        "image": "shopify://shop_images/braid-image-106.png",
+        "heading": "FAQs – Frequently Asked Questions"
+      }
     },
     "marquee": {
       "type": "braid-image-marquee",
-      "settings": {}
+      "settings": {
+        "text": "Luxury Hair for Women Who Lead"
+      }
     }
   },
   "order": [
