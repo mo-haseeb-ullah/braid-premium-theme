@@ -29,29 +29,7 @@
         </div>
       {% endfor %}
 
-      <!-- If no blocks are added by user in editor, show 4 default demo cards! -->
-      {% if section.blocks.size == 0 %}
-        <div class="service-card">
-          <div class="service-image-wrapper"><img src="{{ 'braid-image-20.png' | asset_url }}" class="service-img"></div>
-          <h3 class="service-card-title">Knotless Braids</h3>
-          <p class="service-card-price">.00</p>
-        </div>
-        <div class="service-card">
-          <div class="service-image-wrapper"><img src="{{ 'braid-image-21.png' | asset_url }}" class="service-img"></div>
-          <h3 class="service-card-title">Goddess Braids</h3>
-          <p class="service-card-price">.00</p>
-        </div>
-        <div class="service-card">
-          <div class="service-image-wrapper"><img src="{{ 'braid-image-23.png' | asset_url }}" class="service-img"></div>
-          <h3 class="service-card-title">Cornrows with Design</h3>
-          <p class="service-card-price">.00</p>
-        </div>
-        <div class="service-card">
-          <div class="service-image-wrapper"><img src="{{ 'braid-image-24.png' | asset_url }}" class="service-img"></div>
-          <h3 class="service-card-title">Boho Braids</h3>
-          <p class="service-card-price">.00</p>
-        </div>
-      {% endif %}
+
     </div>
 
     <!-- Bottom Row: Button -->
@@ -230,7 +208,37 @@
   ],
   "presets": [
     {
-      "name": "Braid Services Grid"
+      "name": "Braid Services Grid",
+      "blocks": [
+        {
+          "type": "service",
+          "settings": {
+            "title": "Knotless Braids",
+            "price": "From $150.00"
+          }
+        },
+        {
+          "type": "service",
+          "settings": {
+            "title": "Goddess Braids",
+            "price": "From $175.00"
+          }
+        },
+        {
+          "type": "service",
+          "settings": {
+            "title": "Cornrows with Design",
+            "price": "From $120.00"
+          }
+        },
+        {
+          "type": "service",
+          "settings": {
+            "title": "Boho Braids",
+            "price": "From $200.00"
+          }
+        }
+      ]
     }
   ]
 }
