@@ -72,31 +72,6 @@
     </div>
   </div>
 
-  <!-- You May Also Like -->
-  {% if product.collections.first %}
-    <div class="product-recommendations">
-      <h2 class="recommendations-title">You may also like</h2>
-      <div class="recommendations-grid">
-        {% assign current_product = product %}
-        {% for p in product.collections.first.products limit: 4 %}
-          {% unless p.handle == current_product.handle %}
-            <a href="{{ p.url }}" class="recommendation-card">
-              <div class="recommendation-image-wrapper">
-                {% if p.featured_image %}
-                  <img src="{{ p.featured_image | img_url: '600x' }}" alt="{{ p.title }}" class="recommendation-img primary-img">
-                  {% if p.images[1] %}
-                    <img src="{{ p.images[1] | img_url: '600x' }}" alt="{{ p.title }}" class="recommendation-img secondary-img">
-                  {% endif %}
-                {% endif %}
-              </div>
-              <h3 class="recommendation-card-title">{{ p.title }}</h3>
-              <p class="recommendation-card-price">{{ p.price | money }}</p>
-            </a>
-          {% endunless %}
-        {% endfor %}
-      </div>
-    </div>
-  {% endif %}
 </section>
 
 <style>
@@ -283,73 +258,10 @@
     color: var(--color-base-text);
   }
 
-  /* Recommendations */
-  .product-recommendations {
-    max-width: 1400px;
-    margin: 5rem auto 0 auto;
-  }
-  .recommendations-title {
-    font-family: var(--font-heading-family) !important;
-    font-size: 2rem;
-    font-weight: 400;
-    font-style: italic;
-    color: var(--color-base-text) !important;
-    margin-bottom: 2rem;
-  }
-  .recommendations-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-  }
-  .recommendation-card {
-    text-decoration: none;
-    color: var(--color-base-text);
-  }
-  .recommendation-image-wrapper {
-    position: relative;
-    aspect-ratio: 3/4;
-    border-radius: 12px;
-    overflow: hidden;
-    margin-bottom: 1rem;
-  }
-  .recommendation-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: opacity 0.4s ease, transform 0.4s ease;
-  }
-  .secondary-img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0;
-  }
-  .recommendation-card:hover .primary-img {
-    opacity: 0;
-  }
-  .recommendation-card:hover .secondary-img {
-    opacity: 1;
-  }
-  .recommendation-card:hover .recommendation-img {
-    transform: scale(1.03);
-  }
-  .recommendation-card-title {
-    font-family: var(--font-heading-family) !important;
-    font-size: 1.2rem;
-    font-weight: 400;
-    color: var(--color-base-text) !important;
-    margin-bottom: 0.3rem;
-  }
-  .recommendation-card-price {
-    font-family: var(--font-body-family);
-    font-size: 0.9rem;
-    color: #8c6b5d;
-  }
 
   @media screen and (max-width: 900px) {
     .product-container { grid-template-columns: 1fr; gap: 2rem; }
     .braid-product-section { padding: 0 2rem 4rem 2rem; }
-    .recommendations-grid { grid-template-columns: repeat(2, 1fr); }
   }
 </style>
 

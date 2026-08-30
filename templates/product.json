@@ -12,9 +12,17 @@
     "main": {
       "type": "braid-product-page",
       "settings": {}
+    },
+    "recommendations": {
+      "type": "braid-product-recommendations",
+      "settings": {
+        "title": "You may also like",
+        "products_to_show": 3
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "recommendations"
   ]
 }
