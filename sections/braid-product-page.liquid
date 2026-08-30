@@ -1,0 +1,350 @@
+<section class="braid-product-section">
+  <div class="product-container">
+    <!-- Left: Product Image -->
+    <div class="product-image-col">
+      <div class="product-image-wrapper">
+        {% if product.featured_image %}
+          <img src="{{ product.featured_image | img_url: '1200x' }}" alt="{{ product.title }}" class="product-main-img" id="product-main-img">
+        {% else %}
+          <div class="service-img-placeholder" style="height:600px;">
+            <span>No Image</span>
+          </div>
+        {% endif %}
+        {% if product.images.size > 1 %}
+          <div class="product-image-dots">
+            {% for image in product.images %}
+              <span class="product-dot {% if forloop.first %}active{% endif %}" data-img="{{ image | img_url: '1200x' }}" onclick="document.getElementById('product-main-img').src=this.dataset.img; document.querySelectorAll('.product-dot').forEach(d=>d.classList.remove('active')); this.classList.add('active');">{{ forloop.index }}</span>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Right: Product Info -->
+    <div class="product-info-col">
+      <h1 class="product-title">{{ product.title }}</h1>
+      <p class="product-price">{{ product.price | money }}</p>
+
+      <div class="product-description">
+        {{ product.description }}
+      </div>
+
+      <product-form>
+        {% form 'product', product %}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+
+          {% if product.variants.size > 1 %}
+            <div class="product-variants">
+              <label for="variant-select" class="variant-label">Options</label>
+              <select name="id" id="variant-select" class="variant-select">
+                {% for variant in product.variants %}
+                  <option value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %}selected{% endif %}>
+                    {{ variant.title }} - {{ variant.price | money }}
+                  </option>
+                {% endfor %}
+              </select>
+            </div>
+          {% endif %}
+
+          <div class="product-qty-row">
+            <div class="qty-wrapper">
+              <button type="button" class="qty-btn" onclick="var q=document.getElementById('qty'); q.value=Math.max(1,parseInt(q.value)-1);">&minus;</button>
+              <input type="number" id="qty" name="quantity" value="1" min="1" class="qty-input">
+              <button type="button" class="qty-btn" onclick="var q=document.getElementById('qty'); q.value=parseInt(q.value)+1;">+</button>
+            </div>
+            <button type="submit" class="add-to-cart-btn">
+              Add to cart
+            </button>
+          </div>
+        {% endform %}
+      </product-form>
+
+      <div class="product-meta">
+        <div class="meta-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:20px;height:20px;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          <span>Reliable shipping</span>
+        </div>
+        <div class="meta-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:20px;height:20px;"><path d="M9 14l-4-4m0 0l4-4m-4 4h11a4 4 0 010 8h-1"/></svg>
+          <span>Flexible returns</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- You May Also Like -->
+  {% if product.collections.first %}
+    <div class="product-recommendations">
+      <h2 class="recommendations-title">You may also like</h2>
+      <div class="recommendations-grid">
+        {% assign current_product = product %}
+        {% for p in product.collections.first.products limit: 4 %}
+          {% unless p.handle == current_product.handle %}
+            <a href="{{ p.url }}" class="recommendation-card">
+              <div class="recommendation-image-wrapper">
+                {% if p.featured_image %}
+                  <img src="{{ p.featured_image | img_url: '600x' }}" alt="{{ p.title }}" class="recommendation-img">
+                {% endif %}
+              </div>
+              <h3 class="recommendation-card-title">{{ p.title }}</h3>
+              <p class="recommendation-card-price">{{ p.price | money }}</p>
+            </a>
+          {% endunless %}
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+</section>
+
+<style>
+  .braid-product-section {
+    padding: 0 4rem 6rem 4rem;
+    background-color: #FAEDDE;
+  }
+  .product-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 55% 45%;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  /* Image Column */
+  .product-image-wrapper {
+    position: relative;
+  }
+  .product-main-img {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    border-radius: 16px;
+    display: block;
+  }
+  .product-image-dots {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.5rem;
+    background: rgba(0,0,0,0.4);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+  }
+  .product-dot {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.4);
+    color: #fff;
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-family: var(--font-body-family);
+  }
+  .product-dot.active {
+    background: rgba(255,255,255,0.9);
+    color: #333;
+  }
+
+  /* Info Column */
+  .product-info-col {
+    padding-top: 2rem;
+  }
+  .product-title {
+    font-family: var(--font-heading-family) !important;
+    font-size: 2.8rem;
+    font-weight: 400;
+    font-style: italic;
+    color: #8c6b5d !important;
+    margin-bottom: 0.5rem;
+  }
+  .product-price {
+    font-family: var(--font-body-family);
+    font-size: 1.1rem;
+    color: var(--color-base-text);
+    margin-bottom: 2rem;
+  }
+  .product-description {
+    font-family: var(--font-body-family);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--color-base-text);
+    margin-bottom: 2.5rem;
+  }
+  .product-description p {
+    margin-bottom: 0.8rem;
+  }
+  .product-description strong {
+    font-weight: 600;
+  }
+
+  /* Variants */
+  .product-variants {
+    margin-bottom: 2rem;
+  }
+  .variant-label {
+    display: block;
+    font-family: var(--font-body-family);
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+    color: var(--color-base-text);
+  }
+  .variant-select {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1px solid rgba(74,52,36,0.2);
+    border-radius: 8px;
+    font-family: var(--font-body-family);
+    font-size: 0.95rem;
+    background: transparent;
+    color: var(--color-base-text);
+  }
+
+  /* Qty + Add to Cart */
+  .product-qty-row {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    align-items: stretch;
+  }
+  .qty-wrapper {
+    display: flex;
+    align-items: center;
+    border: 1px solid rgba(74,52,36,0.2);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .qty-btn {
+    width: 44px;
+    height: 100%;
+    background: transparent !important;
+    border: none !important;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: var(--color-base-text) !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .qty-input {
+    width: 48px;
+    text-align: center;
+    border: none;
+    font-family: var(--font-body-family);
+    font-size: 1rem;
+    background: transparent;
+    color: var(--color-base-text);
+    -moz-appearance: textfield;
+  }
+  .qty-input::-webkit-outer-spin-button,
+  .qty-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  .add-to-cart-btn {
+    flex: 1;
+    padding: 1rem 2rem !important;
+    background-color: var(--color-base-text) !important;
+    color: #fff !important;
+    border: none !important;
+    border-radius: 8px !important;
+    font-family: var(--font-body-family) !important;
+    font-weight: 500 !important;
+    font-size: 1rem !important;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: none !important;
+    margin: 0 !important;
+  }
+  .add-to-cart-btn:hover {
+    background-color: #8c6b5d !important;
+  }
+
+  /* Meta */
+  .product-meta {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-family: var(--font-body-family);
+    font-size: 0.9rem;
+    color: var(--color-base-text);
+  }
+
+  /* Recommendations */
+  .product-recommendations {
+    max-width: 1400px;
+    margin: 5rem auto 0 auto;
+  }
+  .recommendations-title {
+    font-family: var(--font-heading-family) !important;
+    font-size: 2rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--color-base-text) !important;
+    margin-bottom: 2rem;
+  }
+  .recommendations-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+  .recommendation-card {
+    text-decoration: none;
+    color: var(--color-base-text);
+  }
+  .recommendation-image-wrapper {
+    aspect-ratio: 3/4;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+  }
+  .recommendation-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+  .recommendation-card:hover .recommendation-img {
+    transform: scale(1.03);
+  }
+  .recommendation-card-title {
+    font-family: var(--font-heading-family) !important;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--color-base-text) !important;
+    margin-bottom: 0.3rem;
+  }
+  .recommendation-card-price {
+    font-family: var(--font-body-family);
+    font-size: 0.9rem;
+    color: #8c6b5d;
+  }
+
+  @media screen and (max-width: 900px) {
+    .product-container { grid-template-columns: 1fr; gap: 2rem; }
+    .braid-product-section { padding: 0 2rem 4rem 2rem; }
+    .recommendations-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Braid Product Page",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Braid Product Page"
+    }
+  ]
+}
+{% endschema %}
