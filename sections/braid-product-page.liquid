@@ -83,7 +83,10 @@
             <a href="{{ p.url }}" class="recommendation-card">
               <div class="recommendation-image-wrapper">
                 {% if p.featured_image %}
-                  <img src="{{ p.featured_image | img_url: '600x' }}" alt="{{ p.title }}" class="recommendation-img">
+                  <img src="{{ p.featured_image | img_url: '600x' }}" alt="{{ p.title }}" class="recommendation-img primary-img">
+                  {% if p.images[1] %}
+                    <img src="{{ p.images[1] | img_url: '600x' }}" alt="{{ p.title }}" class="recommendation-img secondary-img">
+                  {% endif %}
                 {% endif %}
               </div>
               <h3 class="recommendation-card-title">{{ p.title }}</h3>
@@ -303,6 +306,7 @@
     color: var(--color-base-text);
   }
   .recommendation-image-wrapper {
+    position: relative;
     aspect-ratio: 3/4;
     border-radius: 12px;
     overflow: hidden;
@@ -312,7 +316,19 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.4s ease;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .secondary-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+  }
+  .recommendation-card:hover .primary-img {
+    opacity: 0;
+  }
+  .recommendation-card:hover .secondary-img {
+    opacity: 1;
   }
   .recommendation-card:hover .recommendation-img {
     transform: scale(1.03);
