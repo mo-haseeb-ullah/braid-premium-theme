@@ -1,8 +1,21 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
       "type": "braid-about-hero",
-      "settings": {}
+      "settings": {
+        "image": "shopify://shop_images/braid-image-179.png",
+        "heading": "We don't just braid hair — we honor identity.",
+        "text": "<p>At BraidTheory, every braid begins with intention. Our mission is to celebrate and elevate the beauty of textured hair through premium-quality braiding products, timeless styles, and color collections made to match every shade of melanin.</p><p>We believe braiding is more than style — it’s culture, history, and self-expression. Whether you're going for knotless, boho, goddess, or cornrows, we're here to give you the tools, inspiration, and confidence to wear your crown, your way.</p>"
+      }
     },
     "features": {
       "type": "braid-about-features",
@@ -10,11 +23,17 @@
     },
     "values": {
       "type": "braid-about-values",
-      "settings": {}
+      "settings": {
+        "image_left": "shopify://shop_images/braid-image-107.png",
+        "heading": "What We Stand For",
+        "image_right": "shopify://shop_images/braid-image-104.png"
+      }
     },
     "reviews": {
       "type": "braid-about-reviews",
-      "settings": {}
+      "settings": {
+        "bg_image": "shopify://shop_images/braid-image-24.png"
+      }
     }
   },
   "order": [
