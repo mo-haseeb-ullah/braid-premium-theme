@@ -19,7 +19,7 @@
         {% if section.settings.logo != blank %}
           <img src="{{ section.settings.logo | img_url: '400x' }}" alt="{{ shop.name }}">
         {% else %}
-          <span class="logo-text">braid<em>theory</em></span>
+          <span class="logo-text">{{ section.settings.logo_text }}</span>
         {% endif %}
       </a>
     </div>
@@ -128,6 +128,13 @@
       "type": "image_picker",
       "id": "logo",
       "label": "Logo Image"
+    },
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo Text",
+      "default": "braid<em>theory</em>",
+      "info": "Use <em>text</em> to make part of it italic."
     }
   ]
 }
