@@ -14,7 +14,7 @@
     </nav>
     
     <!-- Center Logo -->
-    <div class="header-logo">
+    <div class="header-logo" {% if template.name == 'index' and section.settings.hide_on_home %}style="visibility: hidden;"{% endif %}>
       <a href="/">
         {% if section.settings.logo != blank %}
           <img src="{{ section.settings.logo | img_url: '400x' }}" alt="{{ shop.name }}">
@@ -86,6 +86,12 @@
   }
   .header-logo a {
     text-decoration: none;
+    display: inline-block;
+  }
+  .header-logo img {
+    max-height: 45px;
+    width: auto;
+    object-fit: contain;
   }
   .logo-text {
     font-family: var(--font-heading-family);
@@ -124,6 +130,12 @@
 {
   "name": "Braid Header",
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "hide_on_home",
+      "label": "Hide logo on homepage",
+      "default": true
+    },
     {
       "type": "image_picker",
       "id": "logo",
