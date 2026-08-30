@@ -8,7 +8,13 @@
       <a href="/collections/services" class="header-link">Services</a>
       <a href="/pages/about" class="header-link">About</a>
       <a href="/pages/faqs" class="header-link">FAQs</a>
-      <a href="/blogs/news" class="header-link">Blog</a>
+      
+      {% if section.settings.blog != blank %}
+        <a href="{{ section.settings.blog.url }}" class="header-link">Blog</a>
+      {% else %}
+        <a href="/blogs/news" class="header-link">Blog</a>
+      {% endif %}
+      
       <a href="/pages/gallery" class="header-link">Gallery</a>
       <a href="/pages/contact" class="header-link">Contact</a>
     </nav>
@@ -147,6 +153,11 @@
       "label": "Logo Text",
       "default": "braid<em>theory</em>",
       "info": "Use <em>text</em> to make part of it italic."
+    },
+    {
+      "type": "blog",
+      "id": "blog",
+      "label": "Select Blog for Navigation"
     }
   ]
 }
