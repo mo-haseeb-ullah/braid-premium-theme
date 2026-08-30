@@ -1,16 +1,36 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "braid_hero": {
       "type": "braid-theory-hero",
-      "settings": {}
+      "settings": {
+        "image": "shopify://shop_images/braid-image-4.png"
+      }
     },
     "braid_services": {
       "type": "braid-services-grid",
-      "settings": {}
+      "settings": {
+        "title": "Our Services",
+        "text": "",
+        "button_text": "View Full Service Menu",
+        "button_link": ""
+      }
     },
     "braid_about": {
       "type": "braid-about-us",
-      "settings": {}
+      "settings": {
+        "title": "About Braid<em>Theory</em>",
+        "button_text": "More About Us",
+        "button_link": ""
+      }
     },
     "braid_gallery": {
       "type": "braid-gallery",
@@ -18,15 +38,32 @@
     },
     "braid_story": {
       "type": "braid-story-split",
-      "settings": {}
+      "settings": {
+        "text": ""
+      }
     },
     "braid_collection": {
       "type": "braid-collection-split",
-      "settings": {}
+      "settings": {
+        "title": "New collection",
+        "subtitle": "",
+        "product_1_name": "Boho Curls",
+        "product_1_price": "$175.00",
+        "product_2_name": "Wool Twisted",
+        "product_2_price": "$140.00",
+        "product_3_name": "Faux Locs",
+        "product_3_price": "$250.00",
+        "button_text": "Shop Now",
+        "button_link": ""
+      }
     },
     "braid_banner": {
       "type": "braid-image-banner",
-      "settings": {}
+      "settings": {
+        "title": "Luxury Hair for Women Who Lead",
+        "button_text": "Shop Now",
+        "button_link": ""
+      }
     }
   },
   "order": [
