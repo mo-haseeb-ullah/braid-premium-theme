@@ -23,7 +23,8 @@
           "settings": {
             "image": "shopify://shop_images/braid-image-100.png",
             "title": "Service Name",
-            "price": "50"
+            "price": "50",
+            "link": ""
           }
         },
         "service_i83kfz": {
@@ -31,7 +32,8 @@
           "settings": {
             "image": "shopify://shop_images/braid-image-101.png",
             "title": "Service Name",
-            "price": "60"
+            "price": "60",
+            "link": ""
           }
         },
         "service_WtEGUE": {
@@ -39,7 +41,8 @@
           "settings": {
             "image": "shopify://shop_images/braid-image-57.png",
             "title": "Service Name",
-            "price": ".00"
+            "price": ".00",
+            "link": ""
           }
         },
         "service_FiVF4P": {
@@ -47,7 +50,8 @@
           "settings": {
             "image": "shopify://shop_images/braid-image-80.png",
             "title": "Service Name",
-            "price": ".00"
+            "price": ".00",
+            "link": ""
           }
         }
       },
