@@ -1,0 +1,132 @@
+﻿<section class="braid-about-reviews">
+  {% if section.settings.bg_image != blank %}
+    <img src="{{ section.settings.bg_image | img_url: '2000x' }}" alt="Reviews Background" class="reviews-bg-img">
+  {% else %}
+    <div class="reviews-bg-img placeholder-bg"></div>
+  {% endif %}
+  <div class="reviews-overlay"></div>
+  
+  <div class="reviews-container">
+    <div class="reviews-list">
+      
+      <!-- Review 1 -->
+      <div class="review-item">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-quote">"I ordered a braided wig from Braid Theory and couldn't believe the quality — full, neat, and looked exactly like the pictures. It saved me so much time and still gave me that fresh braid look. Definitely coming back for another!"</p>
+        <p class="review-author">- Tasha M.</p>
+      </div>
+
+      <!-- Review 2 -->
+      <div class="review-item">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-quote">"From the moment I walked in, I felt welcomed and seen. My stylist listened to exactly what I wanted and nailed it. The goddess braids turned out bold and beautiful, and they lasted for weeks. 10/10 experience!"</p>
+        <p class="review-author">- Brielle A.</p>
+      </div>
+
+      <!-- Review 3 -->
+      <div class="review-item">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-quote">"I've never had braids feel this light and look this flawless. The knotless style was done with so much care — my scalp wasn't sore at all. The booking was easy, the vibe in the studio was amazing, and I left feeling like a queen."</p>
+        <p class="review-author">- Jasmine R.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .braid-about-reviews {
+    position: relative;
+    width: 100%;
+    padding: 8rem 2rem;
+    overflow: hidden;
+  }
+  .reviews-bg-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+  }
+  .placeholder-bg {
+    background-color: #332B25;
+  }
+  .reviews-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Dark overlay */
+    z-index: 2;
+  }
+  .reviews-container {
+    position: relative;
+    z-index: 3;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    color: #FFFFFF;
+  }
+  .reviews-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+  }
+  .review-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .review-stars {
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
+  }
+  .review-quote {
+    font-family: var(--font-body-family);
+    font-style: italic;
+    font-size: 1.15rem;
+    line-height: 1.6;
+    margin: 0 0 1rem 0;
+    opacity: 0.95;
+  }
+  .review-author {
+    font-family: var(--font-body-family);
+    font-size: 1rem;
+    margin: 0;
+    opacity: 0.8;
+  }
+
+  @media screen and (max-width: 768px) {
+    .braid-about-reviews {
+      padding: 5rem 1.5rem;
+    }
+    .reviews-list {
+      gap: 3rem;
+    }
+    .review-quote {
+      font-size: 1rem;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "About Reviews Background",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Reviews Background"
+    }
+  ]
+}
+{% endschema %}

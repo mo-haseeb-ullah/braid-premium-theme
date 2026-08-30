@@ -1,0 +1,122 @@
+﻿<section class="braid-about-features" style="background-color: var(--color-base-background-1);">
+  <div class="features-container">
+    <div class="features-grid">
+      
+      <!-- Feature 1 -->
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+            <path d="M4 15H2V11H4M8 15H6V11H8M12 15H10V11H12"/>
+            <path d="M14 6H20L23 10V17H21M14 6V17H15M14 6V4H2V8"/>
+            <circle cx="18" cy="17" r="3"/>
+            <circle cx="8" cy="17" r="3"/>
+          </svg>
+        </div>
+        <div class="feature-text">
+          <h3 class="feature-title">Fast delivery</h3>
+          <p class="feature-desc">We deliver your crown quickly and reliably.</p>
+        </div>
+      </div>
+
+      <!-- Feature 2 -->
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+            <path d="M2 10L12 2L22 10L12 22L2 10Z"/>
+            <path d="M2 10H22"/>
+            <path d="M12 2V22"/>
+            <path d="M6 6L12 10L18 6"/>
+          </svg>
+        </div>
+        <div class="feature-text">
+          <h3 class="feature-title">Diamond Quality</h3>
+          <p class="feature-desc">Every strand is premium, every piece crafted to perfection.</p>
+        </div>
+      </div>
+
+      <!-- Feature 3 -->
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+            <path d="M12 7.5C12 7.5 9 3 6 3C2.5 3 2 7 2 9C2 13 12 20 12 20C12 20 22 13 22 9C22 7 21.5 3 18 3C15 3 12 7.5 12 7.5Z"/>
+            <path d="M3 13V18C3 19.1046 3.89543 20 5 20H8"/>
+            <path d="M21 13V18C21 19.1046 20.1046 20 19 20H16"/>
+          </svg>
+        </div>
+        <div class="feature-text">
+          <h3 class="feature-title">Customer-First Care</h3>
+          <p class="feature-desc">From first click to flawless install — we're here for you every step.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .braid-about-features {
+    padding: 5rem 4rem;
+  }
+  .features-container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4rem;
+    align-items: center;
+  }
+  .feature-item {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .feature-icon {
+    flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+    color: #6C4F3D; /* Brown tone from screenshot */
+  }
+  .feature-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+  .feature-text {
+    flex-grow: 1;
+  }
+  .feature-title {
+    font-family: var(--font-heading-family) !important;
+    font-size: 1.8rem;
+    color: var(--color-base-text);
+    margin: 0 0 0.5rem 0;
+    font-weight: 400;
+  }
+  .feature-desc {
+    font-family: var(--font-body-family);
+    font-size: 0.95rem;
+    color: var(--color-base-text);
+    margin: 0;
+    opacity: 0.8;
+    line-height: 1.5;
+  }
+
+  @media screen and (max-width: 1024px) {
+    .features-grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "About Features Banner",
+  "settings": [],
+  "presets": [
+    {
+      "name": "About Features Banner"
+    }
+  ]
+}
+{% endschema %}

@@ -1,33 +1,26 @@
-{
+﻿{
   "sections": {
-    "marquee": {
-      "type": "braid-marquee-banner",
-      "settings": {
-        "text": "About us"
-      }
-    },
-    "about_hero": {
+    "hero": {
       "type": "braid-about-hero",
       "settings": {}
     },
     "features": {
-      "type": "braid-features-row",
+      "type": "braid-about-features",
       "settings": {}
     },
     "values": {
-      "type": "braid-values-grid",
+      "type": "braid-about-values",
       "settings": {}
     },
-    "fullwidth": {
-      "type": "braid-fullwidth-image",
+    "reviews": {
+      "type": "braid-about-reviews",
       "settings": {}
     }
   },
   "order": [
-    "marquee",
-    "about_hero",
+    "hero",
     "features",
     "values",
-    "fullwidth"
+    "reviews"
   ]
 }

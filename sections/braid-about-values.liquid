@@ -1,0 +1,151 @@
+﻿<section class="braid-about-values" style="background-color: var(--color-base-background-1);">
+  <div class="values-container">
+    
+    <!-- Left Image -->
+    <div class="values-image-col">
+      {% if section.settings.image_left != blank %}
+        <img src="{{ section.settings.image_left | img_url: '800x' }}" alt="Values Left" class="values-img">
+      {% else %}
+        <div class="placeholder-img" style="background-color: #E6E2DA; width: 100%; height: 100%; min-height: 600px; border-radius: 20px;"></div>
+      {% endif %}
+    </div>
+
+    <!-- Center Text -->
+    <div class="values-text-col">
+      <h2 class="values-heading">{{ section.settings.heading | default: "What We Stand For" }}</h2>
+      
+      <div class="values-list">
+        <div class="value-item">
+          <h4 class="value-title">Cultural Pride</h4>
+          <p class="value-desc">Our roots are everything. We honor the legacy of braiding while bringing a fresh, modern aesthetic to every strand.</p>
+        </div>
+        <div class="value-item">
+          <h4 class="value-title">Uncompromising Quality</h4>
+          <p class="value-desc">From premium synthetic fibers to color tones that complement melanin-rich skin — we don't cut corners. Ever.</p>
+        </div>
+        <div class="value-item">
+          <h4 class="value-title">For Every Shade</h4>
+          <p class="value-desc">Whether you're cool-toned, warm, golden, or deep — we've got a braid color that feels made for you.</p>
+        </div>
+        <div class="value-item">
+          <h4 class="value-title">No Gatekeeping Beauty</h4>
+          <p class="value-desc">Protective styles should be easy, beautiful, and yours to own. No long salon waits. No limits.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Image -->
+    <div class="values-image-col">
+      {% if section.settings.image_right != blank %}
+        <img src="{{ section.settings.image_right | img_url: '800x' }}" alt="Values Right" class="values-img">
+      {% else %}
+        <div class="placeholder-img" style="background-color: #E6E2DA; width: 100%; height: 100%; min-height: 600px; border-radius: 20px;"></div>
+      {% endif %}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .braid-about-values {
+    padding: 6rem 4rem;
+  }
+  .values-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+  .values-image-col {
+    width: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  .values-img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 4/5;
+    object-fit: cover;
+    display: block;
+    border-radius: 20px;
+  }
+  .values-text-col {
+    text-align: center;
+    padding: 0 2rem;
+  }
+  .values-heading {
+    font-family: var(--font-heading-family) !important;
+    font-size: 2.5rem;
+    font-weight: 400;
+    color: var(--color-base-text);
+    margin: 0 0 3rem 0;
+  }
+  .values-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+  .value-item {
+    text-align: center;
+  }
+  .value-title {
+    font-family: var(--font-body-family);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-base-text);
+    margin: 0 0 0.5rem 0;
+  }
+  .value-desc {
+    font-family: var(--font-body-family);
+    font-size: 1rem;
+    color: var(--color-base-text);
+    margin: 0;
+    opacity: 0.8;
+    line-height: 1.6;
+  }
+
+  @media screen and (max-width: 1024px) {
+    .values-container {
+      grid-template-columns: 1fr;
+      gap: 4rem;
+    }
+    .values-text-col {
+      order: -1; /* Put text on top for mobile */
+      padding: 0;
+    }
+    .values-img {
+      aspect-ratio: 1/1;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "About Values Split",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image_left",
+      "label": "Left Image"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "What We Stand For"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_right",
+      "label": "Right Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Values Split"
+    }
+  ]
+}
+{% endschema %}
