@@ -1,0 +1,197 @@
+<section class="braid-contact-form-section" style="background-color: var(--color-base-background-1);">
+  <div class="contact-form-container">
+    
+    <!-- Left Form -->
+    <div class="contact-form-col">
+      <h2 class="form-heading">{{ section.settings.heading }}</h2>
+      
+      {% form 'contact', class: 'braid-form' %}
+        {% if form.posted_successfully? %}
+          <p class="form-success">Thanks for contacting us. We'll get back to you as soon as possible.</p>
+        {% endif %}
+        
+        {{ form.errors | default_errors }}
+        
+        <div class="form-row">
+          <div class="form-group">
+            <input type="text" name="contact[name]" id="ContactFormName" placeholder="Name" required>
+          </div>
+          <div class="form-group">
+            <input type="email" name="contact[email]" id="ContactFormEmail" placeholder="Email" required>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <input type="tel" name="contact[phone]" id="ContactFormPhone" placeholder="Phone">
+        </div>
+        
+        <div class="form-group">
+          <textarea name="contact[body]" id="ContactFormMessage" rows="8" placeholder="Comment" required></textarea>
+        </div>
+        
+        <button type="submit" class="submit-btn">{{ section.settings.button_text }}</button>
+      {% endform %}
+    </div>
+
+    <!-- Right Image -->
+    <div class="contact-image-col">
+      {% if section.settings.image != blank %}
+        <img src="{{ section.settings.image | img_url: '1000x' }}" alt="{{ section.settings.heading }}" class="form-img">
+      {% else %}
+        <div class="placeholder-img" style="background-color: #E6E2DA; width: 100%; height: 100%; min-height: 500px; border-radius: 20px;"></div>
+      {% endif %}
+    </div>
+    
+  </div>
+</section>
+
+<style>
+  .braid-contact-form-section {
+    padding: 6rem 4rem;
+  }
+  .contact-form-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+  
+  .contact-form-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  .form-heading {
+    font-family: var(--font-heading-family) !important;
+    font-size: 3rem;
+    font-weight: 400;
+    color: var(--color-base-text);
+    margin: 0 0 3rem 0;
+    text-align: center;
+  }
+
+  .braid-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+  
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 1.2rem;
+    border: none;
+    background-color: #FFFFFF;
+    border-radius: 4px;
+    font-family: var(--font-body-family);
+    font-size: 1rem;
+    color: #333;
+    outline: none;
+  }
+  .form-group input::placeholder,
+  .form-group textarea::placeholder {
+    color: #666;
+    opacity: 0.8;
+  }
+  
+  .submit-btn {
+    align-self: flex-start;
+    padding: 1rem 2.5rem;
+    background-color: #6C4F3D; /* Brown brand color */
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    font-family: var(--font-body-family);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 1rem;
+  }
+  .submit-btn:hover {
+    background-color: #553E30;
+  }
+  
+  .form-success {
+    color: green;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  .contact-image-col {
+    width: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  .form-img {
+    width: 100%;
+    height: 100%;
+    max-height: 700px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    border-radius: 20px;
+  }
+
+  @media screen and (max-width: 900px) {
+    .contact-form-container {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+    .contact-image-col {
+      order: -1; /* Move image to top on mobile */
+    }
+    .form-heading {
+      font-size: 2.5rem;
+    }
+    .braid-contact-form-section {
+      padding: 4rem 2rem;
+    }
+    .submit-btn {
+      align-self: center;
+      width: 100%;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Contact Form Split",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Contact us"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Submit"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Right Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact Form Split"
+    }
+  ]
+}
+{% endschema %}
