@@ -62,14 +62,16 @@
         </div>
       </div>
       
-      <a href="/cart" class="header-icon" onclick="openCartDrawer(event)"><svg viewBox="0 0 20 20" style="width:22px;height:22px;"><path fill-rule="evenodd" d="M14 6V4a4 4 0 10-8 0v2H2v10a2 2 0 002 2h12a2 2 0 002-2V6h-4zm-2 0H8V4a2 2 0 114 0v2zm4 2H4v8h12V8z" fill="currentColor"></path></svg></a>
+      <a href="/cart" class="header-icon cart-icon-wrapper" onclick="openCartDrawer(event)">
+        <svg viewBox="0 0 20 20" style="width:22px;height:22px;"><path fill-rule="evenodd" d="M14 6V4a4 4 0 10-8 0v2H2v10a2 2 0 002 2h12a2 2 0 002-2V6h-4zm-2 0H8V4a2 2 0 114 0v2zm4 2H4v8h12V8z" fill="currentColor"></path></svg>
+        <span id="cart-count-bubble" class="cart-bubble" {% if cart.item_count == 0 %}style="display:none;"{% endif %}>{{ cart.item_count }}</span>
+      </a>
     </div>
     
   </div>
 </header>
 
 <style>
-  /* Header wrapper - always on top, transparent */
   #shopify-section-header, .shopify-section-header, [id*="header-group"] {
     position: absolute !important;
     top: 0;
@@ -99,7 +101,6 @@
     gap: 1.8rem;
   }
 
-  /* DEFAULT: Brown text (visible on cream pages) */
   .header-link {
     text-decoration: none;
     color: #4a3424 !important;
@@ -144,14 +145,40 @@
     display: flex;
     justify-content: flex-end;
     gap: 2rem;
+    align-items: center;
   }
 
   .header-icon {
     color: #4a3424 !important;
     transition: color 0.3s ease, opacity 0.3s ease;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
   }
   .header-icon:hover {
     opacity: 0.6;
+  }
+  
+  .cart-icon-wrapper {
+    position: relative;
+  }
+  .cart-bubble {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    background-color: #6C4F3D;
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    font-family: var(--font-body-family);
+    min-width: 18px;
+    height: 18px;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
+    line-height: 1;
   }
 
   /* Account Dropdown */
@@ -304,6 +331,11 @@
       "type": "blog",
       "id": "blog",
       "label": "Select Blog for Navigation"
+    },
+    {
+      "type": "page",
+      "id": "contact_page",
+      "label": "Select Contact Page for Navigation"
     }
   ]
 }
