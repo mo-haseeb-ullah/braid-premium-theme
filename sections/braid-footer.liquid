@@ -17,19 +17,19 @@
         <div class="footer-links-col">
           <h4 class="footer-links-heading">{{ section.settings.col1_title | default: 'OUR COMPANY' }}</h4>
           <ul class="footer-links-list">
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Gallery</a></li>
-            <li><a href="#">Blog</a></li>
+            <li><a href="/pages/about">About Us</a></li>
+            <li><a href="/collections/services">Services</a></li>
+            <li><a href="/pages/gallery">Gallery</a></li>
+            <li><a href="{% if section.settings.blog != blank %}{{ section.settings.blog.url }}{% else %}/blogs/news{% endif %}">Blog</a></li>
           </ul>
         </div>
         <div class="footer-links-col">
           <h4 class="footer-links-heading">{{ section.settings.col2_title | default: 'HELP & SUPPORT' }}</h4>
           <ul class="footer-links-list">
-            <li><a href="#">FAQs</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">Booking Policy</a></li>
-            <li><a href="#">Shipping & Returns</a></li>
+            <li><a href="/pages/faqs">FAQs</a></li>
+            <li><a href="{% if section.settings.contact_page != blank %}{{ section.settings.contact_page.url }}{% else %}/pages/contact{% endif %}">Contact</a></li>
+            <li><a href="/pages/booking-policy">Booking Policy</a></li>
+            <li><a href="/pages/shipping-returns">Shipping & Returns</a></li>
           </ul>
         </div>
         <div class="footer-links-col">
@@ -218,6 +218,16 @@
       "id": "col3_title",
       "label": "Column 3 Heading",
       "default": "CONNECT"
+    },
+    {
+      "type": "blog",
+      "id": "blog",
+      "label": "Select Blog for Navigation"
+    },
+    {
+      "type": "page",
+      "id": "contact_page",
+      "label": "Select Contact Page for Navigation"
     }
   ]
 }

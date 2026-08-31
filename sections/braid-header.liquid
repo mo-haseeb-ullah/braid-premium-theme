@@ -16,7 +16,12 @@
       {% endif %}
       
       <a href="/pages/gallery" class="header-link">Gallery</a>
-      <a href="/pages/contact" class="header-link">Contact</a>
+      
+      {% if section.settings.contact_page != blank %}
+        <a href="{{ section.settings.contact_page.url }}" class="header-link">Contact</a>
+      {% else %}
+        <a href="/pages/contact" class="header-link">Contact</a>
+      {% endif %}
     </nav>
     
     <!-- Center Logo -->
